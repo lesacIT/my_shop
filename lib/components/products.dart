@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_shop/pages/product_details.dart';
 
 class Products extends StatefulWidget {
   @override
@@ -18,7 +19,31 @@ class _ProductsState extends State<Products> {
       "picture": "images/products/dress1.jpeg",
       "old_price": 100,
       "price": 50,
-    }
+    },
+    {
+      "name": "Blazer",
+      "picture": "images/products/dress2.jpeg",
+      "old_price": 90,
+      "price": 85,
+    },
+    {
+      "name": "Blazer",
+      "picture": "images/products/pants2.jpeg",
+      "old_price": 120,
+      "price": 85,
+    },
+    {
+      "name": "Blazer",
+      "picture": "images/products/skt1.jpeg",
+      "old_price": 150,
+      "price": 125,
+    },
+    {
+      "name": "Blazer",
+      "picture": "images/products/skt2.jpeg",
+      "old_price": 140,
+      "price": 95,
+    },
   ];
 
   @override
@@ -60,29 +85,33 @@ class Single_prod extends StatelessWidget {
         tag: prod_name,
         child: Material(
           child: InkWell(
-            onTap: () {},
+            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                //here we are passing the values of the product to the products detail
+                builder: (context) => new ProductDetails(
+                      product_details_name: prod_name,
+                      product_details_new_price: prod_price,
+                      product_details_old_price: prod_old_price,
+                      product_details_picture: prod_picture,
+                    ))),
             child: GridTile(
               footer: Container(
-                color: Colors.white70,
-                child: ListTile(
-                  leading: Text(
-                    prod_name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  title: Text(
-                    "\$$prod_price",
-                    style: TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.w800),
-                  ),
-                  subtitle: Text(
-                    "\$$prod_old_price",
-                    style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w800,
-                        decoration: TextDecoration.lineThrough),
-                  ),
-                ),
-              ),
+                  color: Colors.white70,
+                  child: new Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          prod_name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.0),
+                        ),
+                      ),
+                      new Text(
+                        "\$${prod_price}",
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  )),
               child: Image.asset(
                 prod_picture,
                 fit: BoxFit.cover,

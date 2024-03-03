@@ -152,12 +152,14 @@ class HomePage extends StatelessWidget {
             child: new Text('Categories'),
           ),
           HorizontalList(),
+
+          //padding wiget
           new Padding(
             padding: const EdgeInsets.all(20.0),
             child: new Text('Recent Products'),
           ),
           Container(
-            height: 320.0,
+            height: 480.0,
             child: Products(),
           )
         ],
