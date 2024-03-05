@@ -166,24 +166,24 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           imageCarousel,
           new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Categories'),
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+                alignment: Alignment.centerLeft, child: new Text('Categories')),
           ),
           HorizontalList(),
 
           //padding wiget
           new Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: new Text('Recent Products'),
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                alignment: Alignment.centerLeft,
+                child: new Text('Recent Products')),
           ),
-          Container(
-            height: 480.0,
-            child: Products(),
-          )
+          Flexible(child: Products()),
         ],
       ),
     );
