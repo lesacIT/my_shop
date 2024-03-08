@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:my_shop/components/cart_products.dart';
 
 class Cart extends StatefulWidget {
@@ -27,7 +28,9 @@ class _CartState extends State<Cart> {
           )
         ],
       ),
+
       body: Cart_products(),
+      
       bottomNavigationBar: new Container(
         color: Colors.white,
         child: Row(

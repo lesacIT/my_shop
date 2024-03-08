@@ -4,7 +4,7 @@ class HorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40.0,
+      height: 80.0,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
@@ -26,7 +26,7 @@ class HorizontalList extends StatelessWidget {
           ),
           Category(
             image_location: 'images/cats/informal.png',
-            image_caption: 'formal',
+            image_caption: 'informal',
           ),
         ],
       ),
@@ -47,14 +47,14 @@ class Category extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: Container(
-          width: 80.0,
+          width: 100.0,
           child: Column(
             children: [
               Expanded(
                 child: Image.asset(
                   image_location,
-                  // width: 40.0,
-                  // height: 40.0,
+                  width: 60.0,
+                  height: 40.0,
                 ),
               ),
               Container(

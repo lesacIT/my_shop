@@ -21,36 +21,36 @@ class _ProductsState extends State<Products> {
       "price": 50,
     },
     {
-      "name": "Blazer",
+      "name": "Red Dress",
+      "picture": "images/products/hills1.jpeg",
+      "old_price": 100,
+      "price": 50,
+    },
+    {
+      "name": "Red Dress",
+      "picture": "images/products/blazer2.jpeg",
+      "old_price": 100,
+      "price": 50,
+    },
+    {
+      "name": "Red Dress",
       "picture": "images/products/dress2.jpeg",
-      "old_price": 90,
-      "price": 85,
+      "old_price": 100,
+      "price": 50,
     },
     {
-      "name": "Blazer",
-      "picture": "images/products/pants2.jpeg",
-      "old_price": 120,
-      "price": 85,
-    },
-    {
-      "name": "Blazer",
-      "picture": "images/products/skt1.jpeg",
-      "old_price": 150,
-      "price": 125,
-    },
-    {
-      "name": "Blazer",
+      "name": "Red Dress",
       "picture": "images/products/skt2.jpeg",
-      "old_price": 140,
-      "price": 95,
-    },
+      "old_price": 100,
+      "price": 50,
+    }
   ];
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: product_list.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
       itemBuilder: (BuildContext context, int index) {
@@ -75,10 +75,10 @@ class Single_prod extends StatelessWidget {
   final prod_price;
 
   Single_prod({
-    required this.prod_name,
-    required this.prod_picture,
-    required this.prod_old_price,
-    required this.prod_price,
+    this.prod_name,
+    this.prod_picture,
+    this.prod_old_price,
+    this.prod_price,
   });
 
   @override
@@ -89,18 +89,17 @@ class Single_prod extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                //here we are passing the values of the product to the products detail
                 builder: (context) => new ProductDetails(
-                      product_details_name: prod_name,
-                      product_details_new_price: prod_price,
-                      product_details_old_price: prod_old_price,
-                      product_details_picture: prod_picture,
+                      product_detail_name: prod_name,
+                      product_detail_new_price: prod_price,
+                      product_detail_old_price: prod_old_price,
+                      product_detail_picture: prod_picture,
                     ))),
             child: GridTile(
               footer: Container(
                   color: Colors.white70,
                   child: new Row(
-                    children: [
+                    children: <Widget>[
                       Expanded(
                         child: Text(
                           prod_name,
@@ -108,11 +107,9 @@ class Single_prod extends StatelessWidget {
                               fontWeight: FontWeight.bold, fontSize: 16.0),
                         ),
                       ),
-                      new Text(
-                        "\$${prod_price}",
-                        style: TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.bold),
-                      )
+                      new Text("\$${prod_price}",
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold))
                     ],
                   )),
               child: Image.asset(

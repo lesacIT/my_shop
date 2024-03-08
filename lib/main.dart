@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+
 import 'package:my_shop/components/horizontal_listview.dart';
 import 'package:my_shop/components/products.dart';
 import 'package:my_shop/pages/cart.dart';
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
       width: double.infinity,
       height: 200,
       initialPage: 0,
-      indicatorColor: Colors.blue,
+      indicatorColor: Colors.white,
       indicatorBackgroundColor: Colors.grey,
       children: [
         Image.asset(
@@ -80,8 +81,8 @@ class HomePage extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text('Lê Sắc'),
-              accountEmail: Text('sacB2014605@student.ctu.edu.vn'),
+              accountName: Text('Thu Thảo'),
+              accountEmail: Text('thao47827@gmail.com'),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
                   backgroundColor: Colors.grey,
@@ -131,7 +132,7 @@ class HomePage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => new Cart()));
               },
               child: ListTile(
-                title: Text('Shopping cart'),
+                title: Text('Shopping Cart'),
                 leading: Icon(
                   Icons.shopping_cart,
                   color: Colors.red,
@@ -166,17 +167,15 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
+      body: new Column(
         children: <Widget>[
-          imageCarousel,
+          // imageCarousel,
           new Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(8.0),
             child: Container(
                 alignment: Alignment.centerLeft, child: new Text('Categories')),
           ),
           HorizontalList(),
-
-          //padding wiget
           new Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
