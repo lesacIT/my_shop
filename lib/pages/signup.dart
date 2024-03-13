@@ -1,94 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:my_shop/pages/signup.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class Login extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = new GoogleSignIn();
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _emailTextController = new TextEditingController();
   TextEditingController _passwordTextController = new TextEditingController();
-  late SharedPreferences preferences;
+  TextEditingController _nameTextController = new TextEditingController();
+  TextEditingController _confirmPasswordTextController =
+      new TextEditingController();
+  late String gender;
+  String groupvalue = "male";
   bool loading = false;
-  bool isLogedin = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isSignedIn();
-  }
-
-  void isSignedIn() async {
-    setState(() {
-      loading = true;
-    });
-
-    isLogedin = await googleSignIn.isSignedIn();
-
-    // if (isLogedin) {
-    //   Navigator.pushReplacement(
-    //       context, MaterialPageRoute(builder: (context) => Login()));
-    // }
-
-    setState(() {
-      loading = false;
-    });
-  }
-
-  // Future handleSignedIn() async {
-  //   preferences = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //   GoogleSignInAccount? googleuser = await googleSignIn.signIn();
-  //   GoogleSignInAuthentication? googleSignInAuthentication =
-  //       await googleuser?.authentication;
-  //   final AuthCredential credential = GoogleAuthProvider.credential(
-  //     accessToken: googleSignInAuthentication?.accessToken,
-  //     idToken: googleSignInAuthentication?.idToken,
-  //   );
-  //   final UserCredential authresult =
-  //       await firebaseAuth.signInWithCredential(credential);
-  //   final User? user = authresult.user;
-
-  //   if (user != null) {
-  //     final QuerySnapshot result = await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('id', isEqualTo: user.uid)
-  //         .get();
-  //     final List<DocumentSnapshot> documents = result.docs;
-  //     if (documents.length == 0) {
-  //       FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-  //         "id": user.uid,
-  //         "username": user.displayName,
-  //         "profilepicture": user.photoURL,
-  //       });
-  //       await preferences.setString("id", user.uid ?? "");
-  //       await preferences.setString("username", user.displayName ?? "");
-  //       await preferences.setString("photoUrl", user.photoURL ?? "");
-  //     } else {
-  //       await preferences.setString("id", documents[0]['id']);
-  //       await preferences.setString("username", documents[0]['username']);
-  //       await preferences.setString("photoUrl", documents[0]['photoURL']);
-  //     }
-  //     Fluttertoast.showToast(msg: "Logged in successfuly");
-  //     setState(() {
-  //       loading = false;
-  //     });
-  //     Navigator.pushReplacement(
-  //         context, MaterialPageRoute(builder: (context) => HomePage()));
-  //   } else {
-  //     Fluttertoast.showToast(msg: "Login failed :(");
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +48,63 @@ class _LoginState extends State<Login> {
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: TextFormField(
+                              controller: _nameTextController,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                icon: Icon(Icons.person_outline),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "The name field cannot be empty";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        color: Colors.white.withOpacity(0.),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  "male",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                trailing: Radio(
+                                    value: "male",
+                                    groupValue: groupvalue,
+                                    onChanged: (e) => valueChanged(e)),
+                              ),
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  "female",
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                trailing: Radio(
+                                    value: "female",
+                                    groupValue: groupvalue,
+                                    onChanged: (e) => valueChanged(e)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
@@ -181,16 +167,43 @@ class _LoginState extends State<Login> {
                       ),
                       Padding(
                         padding:
+                            const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: TextFormField(
+                              controller: _confirmPasswordTextController,
+                              decoration: InputDecoration(
+                                hintText: "Comfirm password",
+                                icon: Icon(Icons.lock_outline),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "The password field cannot be empty";
+                                } else if (value.length < 6) {
+                                  return "The password has to be at least 6 characters long";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
                             const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                         child: Material(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blue,
+                          color: Colors.red.shade700,
                           elevation: 0.0,
                           child: MaterialButton(
                             onPressed: () {},
                             minWidth: MediaQuery.of(context).size.width,
                             child: Text(
-                              "Login",
+                              " Register",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
@@ -201,25 +214,15 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Forgot password",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUp()));
+                                Navigator.pop(context);
                               },
                               child: Text(
-                                "Sign up",
-                                style: TextStyle(color: Colors.red),
+                                "Login",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.blue),
                               ))),
                     ],
                   )),
@@ -240,5 +243,15 @@ class _LoginState extends State<Login> {
         ],
       ),
     );
+  }
+
+  valueChanged(e) {
+    setState(() {
+      if (e == "male") {
+        groupvalue = e;
+      } else if (e == "female") {
+        groupvalue = e;
+      }
+    });
   }
 }
