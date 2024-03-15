@@ -1,16 +1,17 @@
-# my_shop
 
-A new Flutter project.
 
-## Getting Started
+# Project học phần PTUD Di động (CT484)
 
-This project is a starting point for a Flutter application.
+Học kỳ 2, Năm học 2023-2024
 
-A few resources to get you started if this is your first Flutter project:
+**MSSV 1** :B2014605 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Họ tên SV 1**:Nguyễn Lê Sắc
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**MSSV 2**:B2014613
+
+**Họ tên SV 2**:Nguyễn Thu Thảo
+
+**Lớp học phần**:ct48403
+
+**Tên dự án**:La Beauté
