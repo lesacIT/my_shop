@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-
 import 'package:my_shop/components/horizontal_listview.dart';
 import 'package:my_shop/components/products.dart';
+import 'package:my_shop/pages/auth/auth_manager.dart';
 import 'package:my_shop/pages/cart.dart';
-
-
+import 'package:provider/provider.dart';
+import '../pages/auth/auth_manager.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -158,6 +158,18 @@ class HomePage extends StatelessWidget {
                 leading: Icon(Icons.help, color: Colors.green),
               ),
             ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context)
+                  ..pop()
+                  ..pushReplacementNamed('/');
+                context.read<AuthManager>().logout();
+              },
+              child: ListTile(
+                title: Text('Logout'),
+                leading: Icon(Icons.exit_to_app, color: Colors.green),
+              ),
+            ),
           ],
         ),
       ),
@@ -182,5 +194,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
