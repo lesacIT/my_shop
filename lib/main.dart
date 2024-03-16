@@ -2,10 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:my_shop/pages/splash_screen.dart';
+import 'package:my_shop/screens/admin.dart';
 import 'package:provider/provider.dart';
 
-// import './pages/login.dart';
-import './pages/home.dart';
 import 'pages/screens.dart';
 
 Future<void> main() async {
@@ -33,15 +32,24 @@ class MyApp extends StatelessWidget {
       child: Consumer<AuthManager>(builder: (context, AuthManager, child) {
         return MaterialApp(
           // Đặt các thuộc tính MaterialApp tại đây
+          // home: AuthManager.isAuth
+          //     ? HomePage()
+          //     : FutureBuilder(
+          //         future: AuthManager.tryAutoLogin(),
+          //         builder: (context, snapshot) {
+          //           return snapshot.connectionState == ConnectionState.waiting
+          //               ? const SplashScreen()
+          //               : const AuthScreen();
+          //         }), // Thay thế MyHomePage bằng màn hình chính của ứng dụng của bạn
           home: AuthManager.isAuth
-              ? HomePage()
+              ? Admin()
               : FutureBuilder(
                   future: AuthManager.tryAutoLogin(),
                   builder: (context, snapshot) {
                     return snapshot.connectionState == ConnectionState.waiting
                         ? const SplashScreen()
                         : const AuthScreen();
-                  }), // Thay thế MyHomePage bằng màn hình chính của ứng dụng của bạn
+                  }), // Thay thế MyHomePage
         );
       }),
     );
