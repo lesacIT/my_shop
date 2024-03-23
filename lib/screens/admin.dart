@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../db/brand.dart';
+import '../db/category.dart';
 
 enum Page { dashboard, manage }
 
@@ -15,6 +19,9 @@ class _AdminState extends State<Admin> {
   TextEditingController brandController = TextEditingController();
   GlobalKey<FormState> _categoryFormKey = GlobalKey();
   GlobalKey<FormState> _brandFormKey = GlobalKey();
+  BrandService _brandService = BrandService();
+  CategoryService _categoryService = CategoryService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -234,13 +241,17 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.category),
               title: Text("Add category"),
-              onTap: () {},
+              onTap: () {
+                _categoryAlert();
+              },
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.add_circle_outline),
               title: Text("Add brand"),
-              onTap: () {},
+              onTap: () {
+                _brandAlert();
+              },
             ),
             Divider(),
             ListTile(
@@ -273,8 +284,54 @@ class _AdminState extends State<Admin> {
         ),
       ),
       actions: <Widget>[
+        TextButton.icon(
+            onPressed: () {
+              if (categoryController.text != null) {
+                _categoryService.createCategory(categoryController.text);
+              }
+              Fluttertoast.showToast(msg: 'category created');
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.close),
+            label: Text('ADD')),
         ElevatedButton.icon(
-            onPressed: () {}, icon: Icon(Icons.close), label: Text('ADD')),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.close),
+            label: Text('CANCEL'))
+      ],
+    );
+
+    showDialog(context: context, builder: (_) => alert);
+  }
+
+  void _brandAlert() {
+    var alert = new AlertDialog(
+      content: Form(
+        key: _brandFormKey,
+        child: TextFormField(
+          controller: brandController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'category cannot be empty';
+            }
+            return null;
+          },
+          decoration: InputDecoration(hintText: "add brand"),
+        ),
+      ),
+      actions: <Widget>[
+        ElevatedButton.icon(
+            onPressed: () {
+              if (brandController.text != null) {
+                _brandService.createBrand(brandController.text);
+              }
+              Fluttertoast.showToast(msg: 'brand created');
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.close),
+            label: Text('ADD')),
         ElevatedButton.icon(
             onPressed: () {
               Navigator.pop(context);
