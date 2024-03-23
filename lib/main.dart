@@ -104,6 +104,7 @@ class MyApp extends StatelessWidget {
             UserProductsScreen.routeName: (ctx) => const SafeArea(
                   child: UserProductsScreen(),
                 ),
+            UserScreen.routeName: (context) => const UserScreen(),
           },
           // onGenerateRoute sẽ được gọi khi không tìm thấy route yêu cầu
           // trong thuộc tính routes ở trên. Thường dùng để truyền tham số

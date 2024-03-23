@@ -10,4 +10,4 @@ export 'products/products_manager.dart';
 export 'products/products_overview_screen.dart';
 export 'products/user_products_screen.dart';
 export 'splash_screen.dart';
-
+export 'user/user_screen.dart';

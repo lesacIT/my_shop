@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "637723176267",
+    "firebase_url": "https://lbshop-project-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "lbshop-project",
+    "storage_bucket": "lbshop-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637723176267:android:98037b521ef290f8ffccce",
+        "android_client_info": {
+          "package_name": "com.example.my_shop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtiHUnUPByvshkqAt0SXQOkW1v0J9fSnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

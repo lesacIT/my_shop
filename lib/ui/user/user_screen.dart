@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../shared/app_drawer.dart';
 import '/ui/auth/auth_manager.dart';
 
 class UserScreen extends StatelessWidget {
@@ -11,6 +12,11 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('MyShop'),
+        // Hiệu chỉnh actions
+      ),
+      drawer: const AppDrawer(),
       body: Column(
         children: [
           const Expanded(
@@ -65,8 +71,8 @@ class _ProfileInfoRow extends StatelessWidget {
   const _ProfileInfoRow({Key? key}) : super(key: key);
 
   final List<ProfileInfoItem> _items = const [
-    ProfileInfoItem("02342343244", 'Phone'),
-    ProfileInfoItem("example@expample.com", 'Email'),
+    ProfileInfoItem("0234437654", 'Phone'),
+    ProfileInfoItem("thuthao@gmail.com", 'Email'),
   ];
 
   @override
@@ -129,7 +135,7 @@ class _TopPortion extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color(0xFF03421A), Color(0xFF0A6937)]),
+                  colors: [Color(0xFF540139), Color(0xFF820233)]),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),

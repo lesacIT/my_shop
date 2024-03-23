@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../orders/orders_screen.dart';
 import '../products/user_products_screen.dart';
+import '../user/user_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -34,7 +35,6 @@ class AppDrawer extends StatelessWidget {
                   .pushReplacementNamed(OrdersScreen.routeName);
             },
           ),
-    
           const Divider(),
           ListTile(
             leading: const Icon(Icons.edit),
@@ -42,6 +42,14 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(UserProductsScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text('User'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
             },
           ),
           const Divider(),
