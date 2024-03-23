@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myshop/ui/admin/admin.dart';
 import 'package:myshop/ui/auth/auth_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,14 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(UserProductsScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.admin_panel_settings),
+            title: const Text('Quản trị viên'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(Admin.routeName);
             },
           ),
           const Divider(),

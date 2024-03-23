@@ -105,6 +105,7 @@ class MyApp extends StatelessWidget {
                   child: UserProductsScreen(),
                 ),
             UserScreen.routeName: (context) => const UserScreen(),
+            Admin.routeName: (context) => Admin(),
           },
           // onGenerateRoute sẽ được gọi khi không tìm thấy route yêu cầu
           // trong thuộc tính routes ở trên. Thường dùng để truyền tham số

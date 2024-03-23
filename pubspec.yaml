@@ -19,6 +19,9 @@ dependencies:
   shared_preferences: ^2.2.2
   firebase_database: ^10.4.0
   firebase_core: ^2.0.7
+  # uuid:
+  # cloud_firestore: ^4.15.7
+  # fluttertoast: ^8.2.4
   
 
 dev_dependencies:
