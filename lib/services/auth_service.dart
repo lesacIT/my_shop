@@ -1,12 +1,12 @@
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../models/http_exception.dart';
-import '../models/auth_token.dart';
+import '../../../models/auth_token.dart';
+import '../../../models/http_exception.dart';
 
 class AuthService {
   static const _authTokenKey = 'authToken';
@@ -41,7 +41,7 @@ class AuthService {
 
       final authToken = _fromJson(responseJson);
       // log(authToken.userId);
-      // log(authToken.token!);
+      // log(authToken.token);
       _saveAuthToken(authToken);
 
       return authToken;
