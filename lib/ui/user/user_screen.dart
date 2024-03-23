@@ -13,7 +13,7 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MyShop'),
+        title: const Text('La Beauté'),
         // Hiệu chỉnh actions
       ),
       drawer: const AppDrawer(),

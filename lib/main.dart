@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.purple,
+      seedColor: Color(0xFF820233),
       secondary: Colors.deepOrange,
       background: Colors.white,
       surfaceTint: Colors.grey[200],
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<AuthManager>(builder: (context, AuthManager, child) {
         return MaterialApp(
-          title: 'MyShop',
+          title: 'La Beauté',
           debugShowCheckedModeBanner: false,
           theme: themData,
           home: AuthManager.isAuth
@@ -106,6 +106,7 @@ class MyApp extends StatelessWidget {
                 ),
             UserScreen.routeName: (context) => const UserScreen(),
             Admin.routeName: (context) => Admin(),
+            Login.routeName: (context) => Login(),
           },
           // onGenerateRoute sẽ được gọi khi không tìm thấy route yêu cầu
           // trong thuộc tính routes ở trên. Thường dùng để truyền tham số

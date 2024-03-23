@@ -28,7 +28,7 @@ class AppBanner extends StatelessWidget {
         ],
       ),
       child: Text(
-        'MyShop',
+        'La Beauté',
         style: TextStyle(
           color: Theme.of(context).textTheme.titleLarge?.color,
           fontSize: 50,
