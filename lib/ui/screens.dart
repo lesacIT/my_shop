@@ -12,4 +12,4 @@ export 'products/user_products_screen.dart';
 export 'splash_screen.dart';
 export 'user/user_screen.dart';
 export 'admin/admin.dart';
-export 'auth/login.dart';
+export 'auth/login_screen.dart';

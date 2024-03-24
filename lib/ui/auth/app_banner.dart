@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AppBanner extends StatelessWidget {
@@ -7,35 +5,59 @@ class AppBanner extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  double getSmallDiameter(BuildContext context) =>
+      MediaQuery.of(context).size.width * 2 / 3;
+  double getBigDiameter(BuildContext context) =>
+      MediaQuery.of(context).size.width * 7 / 8;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20.0),
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 94.0,
-      ),
-      transform: Matrix4.rotationZ(-8 * pi / 180)..translate(-10.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.deepOrange.shade900,
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 8,
-            color: Colors.black26,
-            offset: Offset(0, 2),
-          )
-        ],
-      ),
-      child: Text(
-        'La Beauté',
-        style: TextStyle(
-          color: Theme.of(context).textTheme.titleLarge?.color,
-          fontSize: 50,
-          fontFamily: 'Anton',
-          fontWeight: FontWeight.normal,
+    return Stack(
+      // Đặt các Positioned trong một Stack
+      children: [
+        Positioned(
+          right: -getSmallDiameter(context) / 3,
+          top: -getSmallDiameter(context) / 3,
+          child: Container(
+            width: getSmallDiameter(context),
+            height: getSmallDiameter(context),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [Color(0xFFB226B2), Color(0xFFFF6DA7)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          left: -getBigDiameter(context) / 4,
+          top: -getBigDiameter(context) / 4,
+          child: Container(
+            width: getBigDiameter(context),
+            height: getBigDiameter(context),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [Color(0xFFB226B2), Color(0xFFFF4891)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                "LaBeauté",
+                style: TextStyle(
+                  fontFamily: 'Pacifico',
+                  fontSize: 35,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

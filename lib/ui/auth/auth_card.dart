@@ -75,28 +75,27 @@ class _AuthCardState extends State<AuthCard> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.sizeOf(context);
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 8.0,
       child: Container(
-        height: _authMode == AuthMode.signup ? 320 : 260,
-        constraints:
-            BoxConstraints(minHeight: _authMode == AuthMode.signup ? 320 : 260),
-        width: deviceSize.width * 0.75,
-        padding: const EdgeInsets.all(16.0),
+        height: _authMode == AuthMode.signup ? 500 : 500,
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 10),
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 _buildEmailField(),
-                _buildPasswordField(),
-                if (_authMode == AuthMode.signup) _buildPasswordConfirmField(),
                 const SizedBox(
                   height: 20,
+                ),
+                _buildPasswordField(),
+                const SizedBox(
+                  height: 20,
+                ),
+                if (_authMode == AuthMode.signup) _buildPasswordConfirmField(),
+                const SizedBox(
+                  height: 50,
                 ),
                 ValueListenableBuilder<bool>(
                   valueListenable: _isSubmitting,
@@ -106,6 +105,9 @@ class _AuthCardState extends State<AuthCard> {
                     }
                     return _buildSubmitButton();
                   },
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 _buildAuthModeSwitchButton(),
               ],
@@ -138,18 +140,30 @@ class _AuthCardState extends State<AuthCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Color(0xFFFF4891),
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 130.0, vertical: 8.0),
       ),
-      child: Text(_authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP'),
+      child: Text(
+        _authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP',
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 
   Widget _buildPasswordConfirmField() {
     return TextFormField(
       enabled: _authMode == AuthMode.signup,
-      decoration: const InputDecoration(labelText: 'Confirm Password'),
+      decoration: const InputDecoration(
+          prefixIcon: Icon(
+            Icons.vpn_key,
+            color: Color(0xFFFF4891),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          labelText: 'Confirm Password'),
       obscureText: true,
       validator: _authMode == AuthMode.signup
           ? (value) {
@@ -162,36 +176,62 @@ class _AuthCardState extends State<AuthCard> {
     );
   }
 
-  Widget _buildPasswordField() {
-    return TextFormField(
-      decoration: const InputDecoration(labelText: 'Password'),
-      obscureText: true,
-      controller: _passwordController,
-      validator: (value) {
-        if (value == null || value.length < 5) {
-          return 'Password is too short!';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        _authData['password'] = value!;
-      },
+  Widget _buildEmailField() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: TextFormField(
+        decoration: const InputDecoration(
+          prefixIcon: Icon(
+            Icons.email,
+            color: Color(0xFFFF4891),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          labelText: 'E-Mail',
+        ),
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty || !value.contains('@')) {
+            return 'Invalid email!';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          _authData['email'] = value!;
+        },
+      ),
     );
   }
 
-  Widget _buildEmailField() {
-    return TextFormField(
-      decoration: const InputDecoration(labelText: 'E-Mail'),
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value!.isEmpty || !value.contains('@')) {
-          return 'Invalid email!';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        _authData['email'] = value!;
-      },
+  Widget _buildPasswordField() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: TextFormField(
+        decoration: const InputDecoration(
+          prefixIcon: Icon(
+            Icons.vpn_key,
+            color: Color(0xFFFF4891),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          labelText: 'Password',
+        ),
+        obscureText: true,
+        controller: _passwordController,
+        validator: (value) {
+          if (value == null || value.length < 5) {
+            return 'Password is too short!';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          _authData['password'] = value!;
+        },
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/admin/admin.dart';
 import 'package:myshop/ui/auth/auth_manager.dart';
-import 'package:myshop/ui/auth/login.dart';
+import 'package:myshop/ui/auth/login_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../orders/orders_screen.dart';
@@ -76,7 +76,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.admin_panel_settings),
             title: const Text('trang test'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(Login.routeName);
+              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
             },
           ),
           const Divider(),
