@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/order_item.dart';
-import '../../ui/screens.dart';
+import '../orderDetails/order_detail_screen.dart';
 // class OrderItemCard extends StatefulWidget {
 //   final OrderItem order;
 
@@ -129,7 +129,7 @@ class OrderItemCard extends StatelessWidget {
       trailing: Text('Tổng tiền: ${formatNumber(orderItem.totalPrice)} đ'),
       onTap: () {
         Navigator.of(context)
-            .pushNamed(OrdersScreen.routeName, arguments: orderItem);
+            .pushNamed(OrderDetailsScreen.routeName, arguments: orderItem);
       },
     );
   }

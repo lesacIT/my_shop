@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-// import './order_details_manager.dart';
+import './order_details_manager.dart';
 import '../../models/cart_item.dart';
 
-// import '../../models/order_item.dart';
+import '../../models/order_item.dart';
 class OrderDetailsItemCard extends StatelessWidget {
   final CartItem cardItem;
 

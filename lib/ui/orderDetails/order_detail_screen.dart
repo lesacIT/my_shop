@@ -6,7 +6,7 @@ import 'order_detail_item_card.dart';
 import 'order_details_manager.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  static String routeName = '/orderDetail';
+  static String routeName = '/OrderDetailsScreen';
 
   final orderItem;
 

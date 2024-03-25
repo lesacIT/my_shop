@@ -107,6 +107,9 @@ class MyApp extends StatelessWidget {
             UserScreen.routeName: (context) => const UserScreen(),
             Admin.routeName: (context) => Admin(),
             HomeScreen.routeName: (context) => HomeScreen(),
+            // OrderDetailsScreen.routeName: (ctx) => const SafeArea(
+            //       child: OrdersScreen(),
+            //   ),
           },
           // onGenerateRoute sẽ được gọi khi không tìm thấy route yêu cầu
           // trong thuộc tính routes ở trên. Thường dùng để truyền tham số
@@ -150,6 +153,7 @@ class MyApp extends StatelessWidget {
                 return OrderDetailsScreen(settings.arguments as OrderItem);
               });
             }
+
             return null;
           },
         );

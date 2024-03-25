@@ -43,7 +43,7 @@ class ProductsGrid extends StatelessWidget {
 
     return Column(
       children: [
-        // SizedBox(height: 5),
+        SizedBox(height: 5),
         Container(
           height: 150,
           width: MediaQuery.of(context).size.width,
