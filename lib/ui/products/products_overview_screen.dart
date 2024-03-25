@@ -31,25 +31,73 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MyShop'),
+        iconTheme: IconThemeData(color: Color(0xFFC8273E)),
+        // title: const Text('MyShop'),
         // Hiệu chỉnh actions
+        backgroundColor: Colors.white,
         actions: <Widget>[
-          ProductFilterMenu(
-            onFilterSelected: (filter) {
-              setState(() {
-                if (filter == FilterOptions.favorites) {
-                  _showOnlyFavorites.value = true;
-                } else {
-                  _showOnlyFavorites.value = false;
-                }
-              });
-            },
+          // ProductFilterMenu(
+          //   onFilterSelected: (filter) {
+          //     setState(() {
+          //       if (filter == FilterOptions.favorites) {
+          //         _showOnlyFavorites.value = true;
+          //       } else {
+          //         _showOnlyFavorites.value = false;
+          //       }
+          //     });
+          //   },
+          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                height: 40,
+                width: MediaQuery.of(context).size.width / 1.5,
+                decoration: BoxDecoration(
+                  color: Colors.black12.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Color(0xFFC8273E),
+                      ),
+                      border: InputBorder.none,
+                      label: Text(
+                        "Tìm kiếm sản phẩm",
+                        style: TextStyle(),
+                      )),
+                ),
+              ),
+              SizedBox(width: 10),
+              Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width / 6,
+                decoration: BoxDecoration(
+                  color: Colors.black12.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: ShoppingCartButton(
+                    // icon: Icon(
+                    //   Icons.shopping_cart,
+                    //   color: Color(0xFFC8273E),
+                    // ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-          ShoppingCartButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(CartScreen.routeName);
-            },
-          ),
+          // ShoppingCartButton(
+          //   onPressed: () {
+          //     Navigator.of(context).pushNamed(CartScreen.routeName);
+          //   },
+          // ),
         ],
       ),
       drawer: const AppDrawer(),

@@ -14,6 +14,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      
       child: Column(
         children: <Widget>[
           // AppBar(
@@ -76,7 +77,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.admin_panel_settings),
             title: const Text('trang test'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
             },
           ),
           const Divider(),
