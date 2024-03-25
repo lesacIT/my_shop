@@ -9,7 +9,7 @@ import '../../models/cart_item.dart';
 import '../../models/product.dart';
 import '../../services/cart_service.dart';
 
-class CartManager with ChangeNotifier {
+class CartManager extends ChangeNotifier {
   // Map<String, CartItem> _items = {
   //   'p1': CartItem(
   //     id: 'c1',

@@ -76,6 +76,7 @@ class _AuthCardState extends State<AuthCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color(0xFFEEEEEE),
       child: Container(
         height: _authMode == AuthMode.signup ? 500 : 500,
         margin: EdgeInsets.fromLTRB(20, 0, 20, 10),
@@ -154,16 +155,23 @@ class _AuthCardState extends State<AuthCard> {
   Widget _buildPasswordConfirmField() {
     return TextFormField(
       enabled: _authMode == AuthMode.signup,
-      decoration: const InputDecoration(
-          prefixIcon: Icon(
-            Icons.vpn_key,
-            color: Color(0xFFFF4891),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Colors.white),
-          ),
-          labelText: 'Confirm Password'),
+      decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        prefixIcon: Icon(
+          Icons.vpn_key,
+          color: Color(0xFFFF4891),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(color: Colors.grey.shade100),
+        ),
+        labelText: 'Confirm Password',
+      ),
       obscureText: true,
       validator: _authMode == AuthMode.signup
           ? (value) {
@@ -180,14 +188,20 @@ class _AuthCardState extends State<AuthCard> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
       child: TextFormField(
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
           prefixIcon: Icon(
             Icons.email,
             color: Color(0xFFFF4891),
           ),
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             borderSide: BorderSide(color: Colors.white),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100),
           ),
           labelText: 'E-Mail',
         ),
@@ -209,14 +223,20 @@ class _AuthCardState extends State<AuthCard> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: TextFormField(
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
           prefixIcon: Icon(
             Icons.vpn_key,
             color: Color(0xFFFF4891),
           ),
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: BorderSide(color: Colors.grey.shade100),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100),
           ),
           labelText: 'Password',
         ),

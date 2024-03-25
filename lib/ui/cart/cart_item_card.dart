@@ -9,7 +9,6 @@ class CartItemCard extends StatelessWidget {
   final String productId;
   final CartItem cardItem;
 
-
   const CartItemCard({
     required this.productId,
     required this.cardItem,
@@ -43,6 +42,7 @@ class CartItemCard extends StatelessWidget {
       },
       onDismissed: (direction) {
         context.read<CartManager>().deleteCartItem(productId);
+        CartScreen.removeItem(productId);
       },
       child: ItemInfoCard(cardItem),
     );

@@ -103,4 +103,6 @@ class CartScreen extends StatelessWidget {
             '${match[1]},'); // Thêm dấu chấm sau mỗi chuỗi 3 chữ số
     return formattedNumber;
   }
+
+  static void removeItem(String productId) {}
 }

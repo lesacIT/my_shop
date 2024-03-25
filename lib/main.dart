@@ -119,7 +119,7 @@ class MyApp extends StatelessWidget {
                 builder: (ctx) {
                   return SafeArea(
                     child: ProductDetailScreen(
-                      ProductsManager().findById(productId)!,
+                      ctx.read<ProductsManager>().findById(productId)!,
                     ),
                   );
                 },
