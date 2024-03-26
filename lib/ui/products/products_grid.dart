@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/product.dart';
-// import 'product_grid_tile.dart';
+import 'product_grid_tile.dart';
 import 'products_manager.dart';
 
 class ProductsGrid extends StatelessWidget {
@@ -41,8 +41,10 @@ class ProductsGrid extends StatelessWidget {
           showFavorites ? productsManager.favoriteItems : productsManager.items,
     );
 
-    return SingleChildScrollView(
-        child: Column(
+    return
+        // SingleChildScrollView(
+        //     child:
+        Column(
       children: [
         SizedBox(height: 5),
         Container(
@@ -208,109 +210,111 @@ class ProductsGrid extends StatelessWidget {
           ),
         ),
         SizedBox(height: 30),
-        GridView.builder(
-          itemCount: productTitles.length,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.6,
-            // crossAxisSpacing: 40,
-          ),
-          itemBuilder: (context, index) {
-            return Container(
-              width: 200,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 220,
-                    child: Stack(
-                      children: [
-                        InkWell(
-                          onTap: () {},
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              imageList[index],
-                              width: 170,
-                              fit: BoxFit.cover,
-                              height: 220,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          right: 10,
-                          top: 10,
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.favorite,
-                                color: Color(0xFFC8273E),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    productTitles[index],
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 22,
-                      ),
-                      Text(
-                        '(' + reviews[index] + ')',
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        prices[index],
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFC8273E),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
 
-        // Expanded(
-        // child: GridView.builder(
-        //   padding: const EdgeInsets.all(10.0),
-        //   itemCount: products.length,
-        //   itemBuilder: (ctx, i) => ProductGridTile(products[i]),
-        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        // GridView.builder(
+        //   itemCount: productTitles.length,
+        //   shrinkWrap: true,
+        //   physics: NeverScrollableScrollPhysics(),
+        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         //     crossAxisCount: 2,
-        //     childAspectRatio: 3 / 2,
-        //     crossAxisSpacing: 10,
-        //     mainAxisSpacing: 10,
+        //     childAspectRatio: 0.6,
+        //     // crossAxisSpacing: 40,
         //   ),
+        //   itemBuilder: (context, index) {
+        //     return Container(
+        //       width: 200,
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.start,
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+        //           SizedBox(
+        //             height: 220,
+        //             child: Stack(
+        //               children: [
+        //                 InkWell(
+        //                   onTap: () {},
+        //                   child: ClipRRect(
+        //                     borderRadius: BorderRadius.circular(10),
+        //                     child: Image.asset(
+        //                       imageList[index],
+        //                       width: 170,
+        //                       fit: BoxFit.cover,
+        //                       height: 220,
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 Positioned(
+        //                   right: 10,
+        //                   top: 10,
+        //                   child: Container(
+        //                     height: 30,
+        //                     width: 30,
+        //                     decoration: BoxDecoration(
+        //                       color: Colors.white,
+        //                       borderRadius: BorderRadius.circular(20),
+        //                     ),
+        //                     child: Center(
+        //                       child: Icon(
+        //                         Icons.favorite,
+        //                         color: Color(0xFFC8273E),
+        //                       ),
+        //                     ),
+        //                   ),
+        //                 )
+        //               ],
+        //             ),
+        //           ),
+        //           SizedBox(height: 10),
+        //           Text(
+        //             productTitles[index],
+        //             style: TextStyle(
+        //               fontSize: 18,
+        //               fontWeight: FontWeight.bold,
+        //             ),
+        //           ),
+        //           SizedBox(height: 10),
+        //           Row(
+        //             children: [
+        //               Icon(
+        //                 Icons.star,
+        //                 color: Colors.amber,
+        //                 size: 22,
+        //               ),
+        //               Text(
+        //                 '(' + reviews[index] + ')',
+        //               ),
+        //               SizedBox(width: 10),
+        //               Text(
+        //                 prices[index],
+        //                 style: TextStyle(
+        //                   fontSize: 18,
+        //                   fontWeight: FontWeight.bold,
+        //                   color: Color(0xFFC8273E),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //         ],
+        //       ),
+        //     );
+        //   },
         // ),
-        // ),
+
+        Expanded(
+          child: GridView.builder(
+            padding: const EdgeInsets.all(10.0),
+            itemCount: products.length,
+            itemBuilder: (ctx, i) => ProductGridTile(products[i]),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 3 / 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+          ),
+        ),
       ],
-    ));
+    );
+    //);
   }
 }

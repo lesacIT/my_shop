@@ -17,16 +17,47 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Giỏ hàng'),
+        leading: BackButton(),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
-          buildCart(cart, context),
+          SizedBox(height: 20),
+          Expanded(
+            child: buildCartDetails(cart), // Đưa buildCartDetails lên đầu
+          ),
+
           const SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: buildCartDetails(cart),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Chọn Tất Cả",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Checkbox(
+                splashRadius: 20,
+                activeColor: Color(0xFFC8273E),
+                value: false,
+                onChanged: (val) {},
+              )
+            ],
           ),
+          Divider(
+            height: 10,
+            thickness: 1,
+            color: Colors.black,
+          ),
+          buildCart(cart, context), // Đưa buildCart xuống dưới
         ],
       ),
     );
@@ -55,7 +86,10 @@ class CartScreen extends StatelessWidget {
           children: <Widget>[
             const Text(
               'Tổng thanh toán',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const Spacer(),
             Chip(

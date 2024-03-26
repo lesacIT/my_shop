@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:myshop/models/order_item.dart';
+import 'package:myshop/ui/cart/cart_screen.dart';
 import 'package:myshop/ui/orderDetails/order_detail_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -106,7 +107,7 @@ class MyApp extends StatelessWidget {
                 ),
             UserScreen.routeName: (context) => const UserScreen(),
             Admin.routeName: (context) => Admin(),
-            HomeScreen.routeName: (context) => HomeScreen(),
+            // CartScreen2.routeName: (context) => CartScreen2,
             // OrderDetailsScreen.routeName: (ctx) => const SafeArea(
             //       child: OrdersScreen(),
             //   ),

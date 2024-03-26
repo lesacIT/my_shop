@@ -77,7 +77,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.admin_panel_settings),
             title: const Text('trang test'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+              // Navigator.of(context).pushReplacementNamed(login_screen.routeName);
             },
           ),
           const Divider(),

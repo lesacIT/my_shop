@@ -1,341 +1,213 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// // import 'package:labeaute/widgets/container_button_modal.dart';
 
-class HomeScreen extends StatelessWidget {
-  static const routeName = 'HomeScreen';
-  List<String> tabs = ["Tất cả", "Danh mục", "Hàng đầu", "Đề xuất"];
+// class login_screen extends StatelessWidget {
+//   static const routeName = 'CartScreen2';
+//   List imageList = [
+//     "images/image2.jpg",
+//     "images/image3.jpg",
+//     "images/image4.jpg",
+//     "images/image5.jpg",
+//   ];
 
-  List imageList = [
-    "images/image2.jpg",
-    "images/image3.jpg",
-    "images/image4.jpg",
-    "images/image5.jpg",
-  ];
+//   List productTitles = ["Son", "Kem nền", "Phấn phủ", "Mascara"];
 
-  List productTitles = ["Son", "Kem nền", "Phấn phủ", "Mascara"];
+//   List prices = [
+//     "150.000đ",
+//     "200.000đ",
+//     "180.000đ",
+//     "190.000đ",
+//   ];
 
-  List prices = [
-    "150.000đ",
-    "200.000đ",
-    "180.000đ",
-    "190.000đ",
-  ];
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Giỏ Hàng"),
+//         leading: BackButton(),
+//         backgroundColor: Colors.transparent,
+//         foregroundColor: Colors.black,
+//         elevation: 0,
+//         centerTitle: true,
+//       ),
+//       body: SingleChildScrollView(
+//         child: Padding(
+//           padding: EdgeInsets.all(15),
+//           child: Column(
+//             children: [
+//               Container(
+//                 child: ListView.builder(
+//                   itemCount: imageList.length,
+//                   shrinkWrap: true,
+//                   scrollDirection: Axis.vertical,
+//                   physics: NeverScrollableScrollPhysics(),
+//                   itemBuilder: (context, index) {
+//                     return Container(
+//                       margin: EdgeInsets.symmetric(vertical: 5),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                         children: [
+//                           Checkbox(
+//                             splashRadius: 20,
+//                             activeColor: Color(0xFFC8273E),
+//                             value: true,
+//                             onChanged: (val) {},
+//                           ),
+//                           ClipRRect(
+//                             borderRadius: BorderRadius.circular(10),
+//                             child: Image.asset(
+//                               imageList[index],
+//                               height: 80,
+//                               width: 80,
+//                               fit: BoxFit.cover,
+//                             ),
+//                           ),
+//                           Column(
+//                             mainAxisAlignment: MainAxisAlignment.end,
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: [
+//                               Text(
+//                                 productTitles[index],
+//                                 style: TextStyle(
+//                                   color: Colors.black87,
+//                                   fontWeight: FontWeight.w900,
+//                                   fontSize: 18,
+//                                 ),
+//                               ),
+//                               SizedBox(height: 10),
+//                               Text(
+//                                 "Son Bbia",
+//                                 style: TextStyle(
+//                                   color: Colors.black26,
+//                                   fontSize: 16,
+//                                 ),
+//                               ),
+//                               SizedBox(height: 10),
+//                               Text(
+//                                 prices[index],
+//                                 style: TextStyle(
+//                                   color: Color(0xFFC8273E),
+//                                   fontSize: 18,
+//                                   fontWeight: FontWeight.w900,
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                           Row(
+//                             children: [
+//                               Icon(
+//                                 CupertinoIcons.minus,
+//                                 color: Colors.green,
+//                               ),
+//                               SizedBox(width: 20),
+//                               Text(
+//                                 "1",
+//                                 style: TextStyle(
+//                                     fontSize: 16, fontWeight: FontWeight.w700),
+//                               ),
+//                               SizedBox(width: 5),
+//                               Icon(
+//                                 CupertinoIcons.plus,
+//                                 color: Color(0xFFC8273E),
+//                               ),
+//                             ],
+//                           )
+//                         ],
+//                       ),
+//                     );
+//                   },
+//                 ),
+//               ),
+//               SizedBox(height: 20),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     "Chọn Tất Cả",
+//                     style: TextStyle(
+//                       fontSize: 16,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                   ),
+//                   Checkbox(
+//                     splashRadius: 20,
+//                     activeColor: Color(0xFFC8273E),
+//                     value: false,
+//                     onChanged: (val) {},
+//                   )
+//                 ],
+//               ),
+//               Divider(
+//                 height: 10,
+//                 thickness: 1,
+//                 color: Colors.black,
+//               ),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(
+//                     "Tổng Tiền",
+//                     style: TextStyle(
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                   ),
+//                   Text(
+//                     "300.000đ",
+//                     style: TextStyle(
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.w900,
+//                       color: Color(0xFFC8273E),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//               SizedBox(height: 20),
+//               InkWell(
+//                 onTap: () {},
+//                 child: ContainerButtonModel(
+//                   itext: "Thanh Toán",
+//                   containerWidth: MediaQuery.of(context).size.width,
+//                   bgColor: Color(0xFFC8273E),
+//                 ),
+//               ),
+//               SizedBox(height: 20),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  List reviews = [
-    "54",
-    "42",
-    "30",
-    "60",
-  ];
+// class ContainerButtonModel extends StatelessWidget {
+//   final Color? bgColor;
+//   final double? containerWidth;
+//   final String itext;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      height: 50,
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      decoration: BoxDecoration(
-                        color: Colors.black12.withOpacity(0.05),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Color(0xFFC8273E),
-                            ),
-                            border: InputBorder.none,
-                            label: Text(
-                              "Tìm kiếm sản phẩm",
-                              style: TextStyle(),
-                            )),
-                      ),
-                    ),
-                    Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width / 6,
-                      decoration: BoxDecoration(
-                        color: Colors.black12.withOpacity(0.05),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.notifications,
-                          color: Color(0xFFC8273E),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 150,
-                  width: MediaQuery.of(context).size.width,
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(20), // Bo góc cho hình ảnh
-                    clipBehavior:
-                        Clip.antiAlias, // Đảm bảo hình ảnh được cắt mượt mà
-                    child: Image.asset(
-                      "images/banner2.jpg",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  height: 50,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: tabs.length,
-                    itemBuilder: (context, index) {
-                      return FittedBox(
-                        child: Container(
-                          height: 40,
-                          margin: EdgeInsets.all(8),
-                          padding: EdgeInsets.only(left: 15, right: 15),
-                          decoration: BoxDecoration(
-                            color: Colors.black12.withOpacity(0.05),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: FittedBox(
-                              child: Text(
-                                tabs[index],
-                                style: TextStyle(
-                                  color: Colors.black38,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 180,
-                  child: ListView.builder(
-                    itemCount: imageList.length,
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 320,
-                        margin: EdgeInsets.only(right: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 180,
-                              width: 180,
-                              child: Stack(
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        imageList[index],
-                                        fit: BoxFit.cover,
-                                        height: 180,
-                                        width: 180,
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: 10,
-                                    top: 10,
-                                    child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.favorite,
-                                          color: Color(0xFFC8273E),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    productTitles[index],
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  SizedBox(
-                                    width: 120,
-                                    child: Text(
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                                      maxLines: 7,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                        size: 20,
-                                      ),
-                                      Text(
-                                        '(' + reviews[index] + ')',
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        prices[index],
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFFC8273E),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: 30),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Sản Phẩm Mới Nhất",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-                GridView.builder(
-                  itemCount: productTitles.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.6,
-                    // crossAxisSpacing: 40,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 200,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 220,
-                            child: Stack(
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      imageList[index],
-                                      width: 170,
-                                      fit: BoxFit.cover,
-                                      height: 220,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 10,
-                                  top: 10,
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFFC8273E),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            productTitles[index],
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                                size: 22,
-                              ),
-                              Text(
-                                '(' + reviews[index] + ')',
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                prices[index],
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFC8273E),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   const ContainerButtonModel(
+//       {super.key, this.bgColor, this.containerWidth, required this.itext});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 60,
+//       width: containerWidth,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(20),
+//         color: bgColor,
+//       ),
+//       child: Center(
+//         child: Text(
+//           itext,
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontWeight: FontWeight.bold,
+//             fontSize: 18,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
