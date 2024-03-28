@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:myshop/models/order_item.dart';
-import 'package:myshop/ui/cart/cart_screen.dart';
 import 'package:myshop/ui/orderDetails/order_detail_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: Color(0xFF820233),
-      secondary: Colors.deepOrange,
+      secondary: Color(0xFFC8273E),
       background: Colors.white,
       surfaceTint: Colors.grey[200],
     );

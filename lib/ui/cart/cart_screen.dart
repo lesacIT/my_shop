@@ -27,57 +27,42 @@ class CartScreen extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 20),
           Expanded(
-            child: buildCartDetails(cart), // Đưa buildCartDetails lên đầu
+            child: buildCartDetails(cart),
           ),
-
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Chọn Tất Cả",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Checkbox(
-                splashRadius: 20,
-                activeColor: Color(0xFFC8273E),
-                value: false,
-                onChanged: (val) {},
-              )
-            ],
-          ),
-          Divider(
-            height: 10,
-            thickness: 1,
-            color: Colors.black,
-          ),
-          buildCart(cart, context), // Đưa buildCart xuống dưới
+          const SizedBox(height: 10),
+          // Divider(
+          //   height: 10,
+          //   thickness: 1,
+          //   color: Colors.black,
+          // ),
+          buildTotalAmount(cart, context),
+          Divider(),
+          SizedBox(height: 10),
+          buildOrderButton(cart, context),
         ],
       ),
     );
   }
 
   Widget buildCartDetails(CartManager cart) {
-    return ListView(
-      children: cart.productEntries
-          .map(
-            (entry) => CartItemCard(
-              productId: entry.key,
-              cardItem: entry.value,
-            ),
-          )
-          .toList(),
+    return ListView.builder(
+      itemCount: cart.productEntries.length,
+      itemBuilder: (context, index) {
+        final entry = cart.productEntries.elementAt(index);
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+              vertical: 10.0), // Khoảng cách dọc giữa các sản phẩm
+          child: CartItemCard(
+            productId: entry.key,
+            cardItem: entry.value,
+          ),
+        );
+      },
     );
   }
 
-  Widget buildCart(CartManager cart, BuildContext context) {
-    return Card(
+  Widget buildTotalAmount(CartManager cart, BuildContext context) {
+    return Container(
       margin: const EdgeInsets.all(15),
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -85,7 +70,7 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             const Text(
-              'Tổng thanh toán',
+              'Tổng Tiền',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -100,26 +85,7 @@ class CartScreen extends StatelessWidget {
                   fontSize: 13,
                 ),
               ),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-            ),
-            TextButton(
-              onPressed: cart.totalAmount <= 0
-                  ? null
-                  : () async {
-                      try {
-                        await context.read<OrdersManager>().addOrder(
-                              cart.productsList,
-                              cart.totalAmount,
-                            );
-                        context.read<CartManager>().clearCart();
-                      } catch (err) {
-                        print("có lỗi nè");
-                      }
-                    },
-              style: TextButton.styleFrom(
-                textStyle: TextStyle(color: Theme.of(context).primaryColor),
-              ),
-              child: const Text('Đặt hàng'),
+              backgroundColor: Colors.black,
             ),
           ],
         ),
@@ -127,14 +93,44 @@ class CartScreen extends StatelessWidget {
     );
   }
 
+  Widget buildOrderButton(CartManager cart, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: ElevatedButton(
+        onPressed: cart.totalAmount <= 0
+            ? null
+            : () async {
+                try {
+                  await context.read<OrdersManager>().addOrder(
+                        cart.productsList,
+                        cart.totalAmount,
+                      );
+                  context.read<CartManager>().clearCart();
+                } catch (err) {
+                  print("có lỗi nè");
+                }
+              },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFC8273E),
+          minimumSize: Size(double.infinity, 50), // Kích thước cho nút
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Text(
+            'Thanh Toán',
+            style:
+                TextStyle(fontSize: 18, color: Colors.white), // Cỡ chữ cho nút
+          ),
+        ),
+      ),
+    );
+  }
+
   String formatNumber(int number) {
-    String formattedNumber =
-        number.toString(); // Giữ lại 3 chữ số sau dấu thập phân
+    String formattedNumber = number.toString();
     formattedNumber = formattedNumber.replaceAllMapped(
-        RegExp(
-            r'(\d{1,3})(?=(\d{3})+(?!\d))'), // Tìm mỗi chuỗi 3 chữ số không có chữ số nào theo sau
-        (Match match) =>
-            '${match[1]},'); // Thêm dấu chấm sau mỗi chuỗi 3 chữ số
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+        (Match match) => '${match[1]},');
     return formattedNumber;
   }
 
