@@ -106,7 +106,6 @@ class ItemInfoCard extends StatelessWidget {
     // );
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
-      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -162,12 +161,12 @@ class ItemInfoCard extends StatelessWidget {
                 CupertinoIcons.minus,
                 color: Colors.green,
               ),
-              SizedBox(width: 20),
+              SizedBox(width: 10),
               Text(
-                "1",
+                '${cartItem.quantity}',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
-              SizedBox(width: 5),
+              SizedBox(width: 10),
               Icon(
                 CupertinoIcons.plus,
                 color: Color(0xFFC8273E),

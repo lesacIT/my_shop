@@ -13,7 +13,6 @@ class AppBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      // Đặt các Positioned trong một Stack
       children: [
         Positioned(
           right: -getSmallDiameter(context) / 3,

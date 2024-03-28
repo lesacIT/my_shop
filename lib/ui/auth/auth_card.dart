@@ -75,10 +75,10 @@ class _AuthCardState extends State<AuthCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       color: Color(0xFFEEEEEE),
       child: Container(
-        height: _authMode == AuthMode.signup ? 500 : 500,
+        height: _authMode == AuthMode.signup ? 450 : 400,
         margin: EdgeInsets.fromLTRB(20, 0, 20, 10),
         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Form(
@@ -96,7 +96,7 @@ class _AuthCardState extends State<AuthCard> {
                 ),
                 if (_authMode == AuthMode.signup) _buildPasswordConfirmField(),
                 const SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
                 ValueListenableBuilder<bool>(
                   valueListenable: _isSubmitting,
@@ -108,7 +108,7 @@ class _AuthCardState extends State<AuthCard> {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 _buildAuthModeSwitchButton(),
               ],
@@ -123,14 +123,14 @@ class _AuthCardState extends State<AuthCard> {
     return TextButton(
       onPressed: _switchAuthMode,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4.0),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         textStyle: TextStyle(
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
       child:
-          Text('${_authMode == AuthMode.login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
+          Text('${_authMode == AuthMode.login ? 'ĐĂNG KÝ' : 'ĐĂNG NHẬP'}'),
     );
   }
 
@@ -143,10 +143,10 @@ class _AuthCardState extends State<AuthCard> {
         ),
         backgroundColor: Color(0xFFFF4891),
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        padding: const EdgeInsets.symmetric(horizontal: 130.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 120.0, vertical: 15.0),
       ),
       child: Text(
-        _authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP',
+        _authMode == AuthMode.login ? 'ĐĂNG NHẬP' : 'ĐĂNG KÝ',
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -170,13 +170,13 @@ class _AuthCardState extends State<AuthCard> {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           borderSide: BorderSide(color: Colors.grey.shade100),
         ),
-        labelText: 'Confirm Password',
+        labelText: 'Xác Nhận Mật Khẩu',
       ),
       obscureText: true,
       validator: _authMode == AuthMode.signup
           ? (value) {
               if (value != _passwordController.text) {
-                return 'Passwords do not match!';
+                return 'Mật khẩu không trùng khớp';
               }
               return null;
             }
@@ -208,7 +208,7 @@ class _AuthCardState extends State<AuthCard> {
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
           if (value!.isEmpty || !value.contains('@')) {
-            return 'Invalid email!';
+            return 'Email không hợp lệ!';
           }
           return null;
         },
@@ -238,13 +238,13 @@ class _AuthCardState extends State<AuthCard> {
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             borderSide: BorderSide(color: Colors.grey.shade100),
           ),
-          labelText: 'Password',
+          labelText: 'Mật Khẩu',
         ),
         obscureText: true,
         controller: _passwordController,
         validator: (value) {
           if (value == null || value.length < 5) {
-            return 'Password is too short!';
+            return 'Mật không hợp lệ!';
           }
           return null;
         },

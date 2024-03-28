@@ -42,6 +42,7 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _quantity = 1;
   List<String> images = List.generate(5, (index) => "images/image2.jpg");
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

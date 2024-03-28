@@ -31,7 +31,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xFFC8273E)),
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Color(0xFFC8273E),
+          size: 25.0,
+        ),
         // title: const Text('MyShop'),
         // Hiệu chỉnh actions
         backgroundColor: Colors.white,
@@ -52,8 +56,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             children: [
               Container(
                 padding: EdgeInsets.all(10),
-                height: 40,
-                width: MediaQuery.of(context).size.width / 1.5,
+                height: 45,
+                width: MediaQuery.of(context).size.width / 1.55,
                 decoration: BoxDecoration(
                   color: Colors.black12.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(10),
@@ -62,7 +66,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Color(0xFFC8273E),
+                        color: Color(0xFF820233),
                       ),
                       border: InputBorder.none,
                       label: Text(
@@ -73,7 +77,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               ),
               SizedBox(width: 10),
               Container(
-                height: 40,
+                height: 45,
+                margin: EdgeInsets.only(right: 10),
                 width: MediaQuery.of(context).size.width / 6,
                 decoration: BoxDecoration(
                   color: Colors.black12.withOpacity(0.05),
@@ -160,6 +165,7 @@ class ShoppingCartButton extends StatelessWidget {
           child: IconButton(
             icon: const Icon(
               Icons.shopping_cart,
+              color: Color(0xFF820233),
             ),
             onPressed: () {
               Navigator.of(context).pushNamed(CartScreen.routeName);

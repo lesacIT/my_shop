@@ -28,14 +28,14 @@ class TopRightBadge extends StatelessWidget {
               color: color ?? Theme.of(context).colorScheme.secondary,
             ),
             constraints: const BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
+              minWidth: 15,
+              minHeight: 15,
             ),
             child: Text(
               data.toString(),
               textAlign: TextAlign.center,
               style: const TextStyle(
-                fontSize: 10,
+                fontSize: 9,
               ),
             ),
           ),
