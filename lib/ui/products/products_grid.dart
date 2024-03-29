@@ -19,7 +19,7 @@ class ProductsGrid extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
       child: Column(
         children: [
           Container(
@@ -81,20 +81,19 @@ class ProductsGrid extends StatelessWidget {
             ),
           ),
           SizedBox(height: 5),
-      
+
           Expanded(
             child: GridView.builder(
               itemCount: products.length,
               itemBuilder: (ctx, i) => ProductGridTile(products[i]),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 3 / 3,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                childAspectRatio: 3 / 4,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
               ),
             ),
           ),
-          
         ],
       ),
     );

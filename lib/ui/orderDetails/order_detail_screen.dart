@@ -19,7 +19,12 @@ class OrderDetailsScreen extends StatelessWidget {
     final orderManager = OrderDetailsManager();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chi tiết đơn mua'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text("CHI TIẾT ĐƠN HÀNG"),
+        automaticallyImplyLeading: true,
+        foregroundColor: Color(0xFF820233),
       ),
       body: Column(
         children: <Widget>[

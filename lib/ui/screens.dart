@@ -13,3 +13,4 @@ export 'products/products_overview_screen.dart';
 export 'products/user_products_screen.dart';
 export 'splash_screen.dart';
 export 'user/user_screen.dart';
+export 'favorite/product_favorite_screen.dart';

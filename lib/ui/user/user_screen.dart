@@ -13,8 +13,26 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('La Beauté'),
-        // Hiệu chỉnh actions
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text("La Beauté"),
+
+        automaticallyImplyLeading: true,
+        // leading: BackButton(
+        //     // onPressed: () {
+        //     //   Navigator.of(context).pop();
+        //     // },
+        //     ),
+        foregroundColor: Color(0xFF820233),
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       // Thực hiện hành động khi nhấn nút yêu thích
+        //     },
+        //     icon: const Icon(Icons.favorite, color: Colors.redAccent),
+        //   ),
+        // ],
       ),
       drawer: const AppDrawer(),
       body: Column(
@@ -30,7 +48,7 @@ class UserScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    "Phương Ly",
+                    "Thu Thảo",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
@@ -50,8 +68,14 @@ class UserScreen extends StatelessWidget {
                         heroTag: 'VIP',
                         elevation: 0,
                         backgroundColor: Theme.of(context).colorScheme.primary,
-                        label: const Text("Đăng xuất", style: TextStyle(color: Colors.white),),
-                        icon: const Icon(Icons.logout, color: Colors.white,),
+                        label: const Text(
+                          "Đăng xuất",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        icon: const Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -156,7 +180,7 @@ class _TopPortion extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(
-                          'https://static.tintuc.com.vn/images/ver3/2020/08/18/1597736702603-1597734687746-ly2-15977220078411964556507.jpg'),
+                          'https://wallpapercave.com/wp/wp8265156.jpg'),
                     ),
                   ),
                 ),

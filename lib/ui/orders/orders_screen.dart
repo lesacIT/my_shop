@@ -15,7 +15,12 @@ class OrdersScreen extends StatelessWidget {
     ordersManager.fetchOrders();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Orders'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text("ĐƠN HÀNG"),
+        automaticallyImplyLeading: true,
+        foregroundColor: Color(0xFF820233),
       ),
       // Thêm Drawer
       drawer: const AppDrawer(),

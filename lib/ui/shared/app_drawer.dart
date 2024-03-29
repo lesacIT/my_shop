@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/admin/admin.dart';
 import 'package:myshop/ui/auth/auth_manager.dart';
-import 'package:myshop/ui/auth/login_screen.dart';
+// import 'package:myshop/ui/auth/login_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../orders/orders_screen.dart';
 import '../products/user_products_screen.dart';
 import '../user/user_screen.dart';
-
+import '../favorite/product_favorite_screen.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
@@ -93,7 +93,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.favorite),
             title: const Text('Favorite'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(Favorites.routeName);
             },
           ),
           // const Divider(),

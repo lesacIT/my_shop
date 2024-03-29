@@ -90,7 +90,7 @@ class ProductGridHeader extends StatelessWidget {
           child: Container(
             width: 40,
             height: 38,
-            color: Colors.white,
+            color: Colors.pink.shade50,
             child: ValueListenableBuilder<bool>(
               valueListenable: product.isFavoriteListenable,
               builder: (ctx, isFavorite, child) {
@@ -98,7 +98,7 @@ class ProductGridHeader extends StatelessWidget {
                   icon: Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_border,
                   ),
-                  color: Theme.of(context).colorScheme.secondary,
+color: Theme.of(context).colorScheme.secondary,
                   iconSize: 24,
                   onPressed: onFavoritePressed,
                 );
@@ -124,37 +124,43 @@ class ProductGridFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridTileBar(
-      backgroundColor: Colors.black45,
-      title: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            product.title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+      backgroundColor: Colors.pink.shade100,
+      title: Padding(
+        padding: const EdgeInsets.only(top: 5.0), // Thêm khoảng cách phía trên
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              product.title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Color(0xFF820233),
+              ),
             ),
-          ),
-          SizedBox(height: 5), // Khoảng cách giữa title và price
-          Text(
-            '\$${product.price.toStringAsFixed(2)}',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFC8273E),
+            SizedBox(height: 5), // Khoảng cách giữa title và price
+            Text(
+              '\$${product.price.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepOrange.shade900,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       trailing: IconButton(
         icon: const Icon(
           Icons.add_shopping_cart,
         ),
         onPressed: onAddToCartPressed,
-        color: Colors.white,
+        color: Color(0xFF820233),
+        splashColor: Colors.black12, // Màu hiệu ứng khi nhấn
+        highlightColor: Colors.black12, // Màu khi đang nhấn giữ
       ),
     );
   }

@@ -106,6 +106,7 @@ class MyApp extends StatelessWidget {
                 ),
             UserScreen.routeName: (context) => const UserScreen(),
             Admin.routeName: (context) => Admin(),
+            Favorites.routeName: (context) => Favorites(true),
             // CartScreen2.routeName: (context) => CartScreen2,
             // OrderDetailsScreen.routeName: (ctx) => const SafeArea(
             //       child: OrdersScreen(),
