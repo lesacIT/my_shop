@@ -18,36 +18,10 @@ class ProductGridTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
-        footer: ProductGridFooter(
+        header: ProductGridHeader(
           product: product,
           onFavoritePressed: () {
             context.read<ProductsManager>().toggleFavoriteStatus(product);
-          },
-          onAddToCartPressed: () async {
-            final cartItem = CartItem(
-              id: product.id!,
-              // Thay 'user_id' bằng logic để lấy userId của người dùng
-              title: product.title,
-              imageUrl: product.imageUrl,
-              quantity: 1,
-              price: product.price,
-            );
-            final cart = context.read<CartManager>();
-            await cart.addCartItem(cartItem);
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: const Text('Item added to cart'),
-                  duration: const Duration(seconds: 2),
-                  action: SnackBarAction(
-                    label: 'UNDO',
-                    onPressed: () {
-                      cart.removeItem(product.id!);
-                    },
-                  ),
-                ),
-              );
           },
         ),
         child: GestureDetector(
@@ -62,6 +36,76 @@ class ProductGridTile extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+        footer: ProductGridFooter(
+          product: product,
+          onAddToCartPressed: () async {
+            final cartItem = CartItem(
+              id: product.id!,
+              title: product.title,
+              imageUrl: product.imageUrl,
+              quantity: 1,
+              price: product.price,
+            );
+            final cart = context.read<CartManager>();
+            await cart.addCartItem(cartItem);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: const Text('Sản phẩm đã được thêm vào giỏ'),
+                  duration: const Duration(seconds: 2),
+                  action: SnackBarAction(
+                    label: 'HOÀN TÁC',
+                    onPressed: () {
+                      cart.removeItem(product.id!);
+                    },
+                  ),
+                ),
+              );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class ProductGridHeader extends StatelessWidget {
+  const ProductGridHeader({
+    Key? key,
+    required this.product,
+    this.onFavoritePressed,
+  }) : super(key: key);
+
+  final Product product;
+  final VoidCallback? onFavoritePressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridTileBar(
+      backgroundColor: Colors.transparent,
+      leading: Padding(
+        padding: const EdgeInsets.only(top: 7.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Container(
+            width: 40,
+            height: 38,
+            color: Colors.white,
+            child: ValueListenableBuilder<bool>(
+              valueListenable: product.isFavoriteListenable,
+              builder: (ctx, isFavorite, child) {
+                return IconButton(
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                  ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  iconSize: 24,
+                  onPressed: onFavoritePressed,
+                );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -71,98 +115,47 @@ class ProductGridFooter extends StatelessWidget {
   const ProductGridFooter({
     Key? key,
     required this.product,
-    this.onFavoritePressed,
     this.onAddToCartPressed,
   }) : super(key: key);
 
   final Product product;
-  final VoidCallback? onFavoritePressed;
   final VoidCallback? onAddToCartPressed;
 
   @override
   Widget build(BuildContext context) {
     return GridTileBar(
-      backgroundColor: Color(0xFF820233),
-      // leading: ValueListenableBuilder<bool>(
-      //   valueListenable: product.isFavoriteListenable,
-      //   builder: (ctx, isFavorite, child) {
-      //     return IconButton(
-      //       icon: Icon(
-      //         isFavorite ? Icons.favorite : Icons.favorite_border,
-      //       ),
-      //       color: Theme.of(context).colorScheme.secondary,
-      //       onPressed: onFavoritePressed,
-      //     );
-      //   },
-      // ),
-      title: Text(
-        product.title,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
+      backgroundColor: Colors.black45,
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            product.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          SizedBox(height: 5), // Khoảng cách giữa title và price
+          Text(
+            '\$${product.price.toStringAsFixed(2)}',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFC8273E),
+            ),
+          ),
+        ],
       ),
       trailing: IconButton(
         icon: const Icon(
           Icons.add_shopping_cart,
         ),
         onPressed: onAddToCartPressed,
-        color: Theme.of(context).colorScheme.secondary,
+        color: Colors.white,
       ),
     );
-    //   Container(
-    // child: Column(
-    //   mainAxisAlignment: MainAxisAlignment.start,
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     SizedBox(
-    //       height: 420,
-    //       child: Stack(
-    //         children: [
-    //           InkWell(
-    //             onTap: () {},
-    //             child: ClipRRect(
-    //               borderRadius: BorderRadius.circular(10),
-    //               child: Image.asset(
-    //                 product.imageUrl,
-    //                 fit: BoxFit.cover,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //     Text(
-    //       product.title,
-    //       style: TextStyle(
-    //         fontSize: 18,
-    //         fontWeight: FontWeight.bold,
-    //       ),
-    //     ),
-    //     Row(
-    //       children: [
-    //         Text(
-    //           '\$${product.price.toStringAsFixed(2)}',
-    //           style: TextStyle(
-    //             fontSize: 18,
-    //             fontWeight: FontWeight.bold,
-    //             color: Color(0xFFC8273E),
-    //           ),
-    //         ),
-    //         SizedBox(width: 10),
-    //         IconButton(
-    //           icon: const Icon(
-    //             Icons.shopping_cart,
-    //           ),
-    //           onPressed: onAddToCartPressed,
-    //           color: Theme.of(context).colorScheme.secondary,
-    //         ),
-    //       ],
-    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     ),
-    //   ],
-    // ),
-    // );
   }
 }

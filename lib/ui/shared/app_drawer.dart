@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Color(0xFF820233),
             ),
           ),
           const Divider(),
@@ -72,14 +72,14 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed(Admin.routeName);
             },
           ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.admin_panel_settings),
-            title: const Text('trang test'),
-            onTap: () {
-              // Navigator.of(context).pushReplacementNamed(login_screen.routeName);
-            },
-          ),
+          // const Divider(),
+          // ListTile(
+          //   leading: const Icon(Icons.admin_panel_settings),
+          //   title: const Text('trang test'),
+          //   onTap: () {
+          //     // Navigator.of(context).pushReplacementNamed(login_screen.routeName);
+          //   },
+          // ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person),
@@ -92,14 +92,6 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Favorite'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
-            },
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.settings, color: Colors.blue),
-            title: const Text('Settings'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
             },
