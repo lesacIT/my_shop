@@ -6,11 +6,13 @@ class TopRightBadge extends StatelessWidget {
     required this.child,
     required this.data,
     this.color,
+    this.textColor = Colors.white, // Màu chữ mặc định là trắng
   });
 
   final Widget child;
   final Object data;
   final Color? color;
+  final Color textColor; // Thêm thuộc tính textColor
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,9 @@ class TopRightBadge extends StatelessWidget {
             child: Text(
               data.toString(),
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 9,
+                color: textColor, // Sử dụng màu chữ được truyền vào
               ),
             ),
           ),

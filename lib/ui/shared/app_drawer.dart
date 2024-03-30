@@ -4,17 +4,17 @@ import 'package:myshop/ui/auth/auth_manager.dart';
 // import 'package:myshop/ui/auth/login_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../favorite/product_favorite_screen.dart';
 import '../orders/orders_screen.dart';
 import '../products/user_products_screen.dart';
 import '../user/user_screen.dart';
-import '../favorite/product_favorite_screen.dart';
+
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      
       child: Column(
         children: <Widget>[
           // AppBar(
@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.shop),
-            title: const Text('Shop'),
+            title: const Text('Cửa Hàng'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
@@ -49,7 +49,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.payment),
-            title: const Text('Orders'),
+            title: const Text('Đơn Hàng'),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(OrdersScreen.routeName);
@@ -58,7 +58,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.edit),
-            title: const Text('Manage Products'),
+            title: const Text('Quản Lí Sản Phẩm'),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(UserProductsScreen.routeName);
@@ -67,7 +67,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.admin_panel_settings),
-            title: const Text('Quản trị viên'),
+            title: const Text('Quản Trị Viên'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(Admin.routeName);
             },
@@ -83,7 +83,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person),
-            title: const Text('User'),
+            title: const Text('Người Dùng'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
             },
@@ -91,7 +91,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.favorite),
-            title: const Text('Favorite'),
+            title: const Text('Yêu Thích'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(Favorites.routeName);
             },
@@ -106,8 +106,16 @@ class AppDrawer extends StatelessWidget {
           // ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text('Logout'),
+            leading: const Icon(
+              Icons.exit_to_app,
+              color: Color(0xFFC8273E),
+            ),
+            title: const Text(
+              'Đăng Xuất',
+              style: TextStyle(
+                color: Color(0xFFC8273E),
+              ),
+            ),
             onTap: () {
               Navigator.of(context)
                 ..pop()

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myshop/ui/products/edit_product_screen.dart';
 import 'package:myshop/ui/products/products_manager.dart';
 import 'package:provider/provider.dart';
@@ -16,41 +17,58 @@ class UserProductListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(product.title),
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(product.imageUrl),
-      ),
-      trailing: SizedBox(
-        width: 100,
-        child: Row(
-          children: <Widget>[
-            // Bắt sự kiện cho nút edit
-            EditUserProductButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(
-                  EditProductScreen.routeName,
-                  arguments: product.id,
-                );
-              },
+    return Card(
+      elevation: 3,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            product.title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
             ),
-            // Bắt sự kiện cho nút delete
-            DeleteUserProductButton(
-              onPressed: () {
-                context.read<ProductsManager>().deleteProduct(product.id!);
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Delete a product',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+          ),
+          subtitle: Text(
+            "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(product.price)}",
+          ),
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage(product.imageUrl),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.edit, color: Theme.of(context).primaryColor),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    EditProductScreen.routeName,
+                    arguments: product.id,
                   );
-              },
-            ),
-          ],
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.delete, color: Color(0xFFC8273E)),
+                onPressed: () {
+                  context.read<ProductsManager>().deleteProduct(product.id!);
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Đã xóa một sản phẩm',
+                          textAlign: TextAlign.center,
+                        ),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: themData,
           home: AuthManager.isAuth
-              ? const ProductsOverviewScreen()
+              ? const NavigationScreen()
               : FutureBuilder(
                   future: AuthManager.tryAutoLogin(),
                   builder: (context, snapshot) {

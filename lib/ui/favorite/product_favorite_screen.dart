@@ -25,7 +25,10 @@ class Favorites extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text("SẢN PHẨM YÊU THÍCH"),
+          title: Text(
+            "SẢN PHẨM YÊU THÍCH",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
 
           automaticallyImplyLeading: true,
           // leading: BackButton(

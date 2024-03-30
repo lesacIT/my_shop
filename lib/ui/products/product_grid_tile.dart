@@ -89,8 +89,8 @@ class ProductGridHeader extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: Container(
-            width: 40,
-            height: 38,
+            width: 35,
+            height: 35,
             color: Colors.pink.shade50,
             child: ValueListenableBuilder<bool>(
               valueListenable: product.isFavoriteListenable,
@@ -100,8 +100,10 @@ class ProductGridHeader extends StatelessWidget {
                     isFavorite ? Icons.favorite : Icons.favorite_border,
                   ),
                   color: Theme.of(context).colorScheme.secondary,
-                  iconSize: 24,
+                  iconSize: 20,
                   onPressed: onFavoritePressed,
+                  splashColor: Colors.black12,
+                  highlightColor: Colors.black12,
                 );
               },
             ),
@@ -156,14 +158,24 @@ class ProductGridFooter extends StatelessWidget {
           ],
         ),
       ),
-      trailing: IconButton(
-        icon: const Icon(
-          Icons.add_shopping_cart,
+      trailing: Container(
+        alignment: Alignment.center,
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFFC8273E),
         ),
-        onPressed: onAddToCartPressed,
-        color: Color(0xFF820233),
-        splashColor: Colors.black12, // Màu hiệu ứng khi nhấn
-        highlightColor: Colors.black12, // Màu khi đang nhấn giữ
+        child: IconButton(
+          icon: const Icon(
+            Icons.add_shopping_cart,
+            color: Colors.white,
+            size: 25,
+          ),
+          onPressed: onAddToCartPressed,
+          splashColor: Colors.black12,
+          highlightColor: Colors.black12,
+        ),
       ),
     );
   }

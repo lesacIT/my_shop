@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,7 @@ class CartItemCard extends StatelessWidget {
       confirmDismiss: (direction) {
         return showConfirmDialog(
           context,
-          'Do you want to remove the item from the cart?',
+          'Bạn muốn xóa sản phẩm khỏi giỏ hàng?',
         );
       },
       onDismissed: (direction) {
@@ -138,15 +139,7 @@ class ItemInfoCard extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Son Bbia",
-                style: TextStyle(
-                  color: Colors.black26,
-                  fontSize: 16,
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                cartItem.price.toString(),
+                "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(cartItem.price * cartItem.quantity)}",
                 style: TextStyle(
                   color: Color(0xFFC8273E),
                   fontSize: 18,

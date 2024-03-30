@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import './order_details_manager.dart';
 import '../../models/cart_item.dart';
 
-import '../../models/order_item.dart';
 class OrderDetailsItemCard extends StatelessWidget {
   final CartItem cardItem;
 
@@ -37,10 +36,10 @@ class OrderDetailsItemCard extends StatelessWidget {
           ),
           title: Text(cardItem.title),
           subtitle: Text(
-            'Total: ${formatNumber(cardItem.price * cardItem.quantity)}',
+            'Đơn giá: ${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(cardItem.price)}',
           ),
           trailing: Text(
-            '${cardItem.quantity} x',
+            'x ${cardItem.quantity}',
             style: TextStyle(
               fontSize: 16,
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myshop/ui/orders/order_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +17,13 @@ class CartScreen extends StatelessWidget {
     cart.getCartFromSharePreferences();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Giỏ hàng'),
+        title: const Text(
+          'GIỎ HÀNG',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         leading: BackButton(),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        foregroundColor: Color(0xFF820233),
         elevation: 0,
         centerTitle: true,
       ),
@@ -72,17 +76,17 @@ class CartScreen extends StatelessWidget {
             const Text(
               'Tổng Tiền',
               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const Spacer(),
             Chip(
               label: Text(
-                '${cart.totalAmount} ',
+                "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(cart.totalAmount)}",
                 style: TextStyle(
                   color: Theme.of(context).primaryTextTheme.titleLarge?.color,
-                  fontSize: 13,
+                  fontSize: 18,
                 ),
               ),
               backgroundColor: Colors.black,
@@ -107,19 +111,19 @@ class CartScreen extends StatelessWidget {
                       );
                   context.read<CartManager>().clearCart();
                 } catch (err) {
-                  print("có lỗi nè");
+                  print("có lỗi xảy ra");
                 }
               },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFFC8273E),
-          minimumSize: Size(double.infinity, 50), // Kích thước cho nút
+          minimumSize: Size(double.infinity, 50),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
           child: Text(
             'Thanh Toán',
             style:
-                TextStyle(fontSize: 18, color: Colors.white), // Cỡ chữ cho nút
+                TextStyle(fontSize: 20, color: Colors.white), // Cỡ chữ cho nút
           ),
         ),
       ),

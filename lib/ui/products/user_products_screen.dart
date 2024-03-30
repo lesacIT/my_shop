@@ -15,7 +15,8 @@ class UserProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your products'),
+        title: const Text('SẢN PHẨM'),
+        backgroundColor: Color(0xFF820233),
         actions: <Widget>[
           // Bắt sự kiện cho nút add
           AddUserProductButton(
@@ -39,8 +40,7 @@ class UserProductsScreen extends StatelessWidget {
             );
           }
           return RefreshIndicator(
-            onRefresh: () =>
-              context.read<ProductsManager>().fetchProducts(),
+            onRefresh: () => context.read<ProductsManager>().fetchProducts(),
             child: const UserProductList(),
           );
         },
@@ -63,10 +63,10 @@ class UserProductList extends StatelessWidget {
           itemCount: productsManager.itemCount,
           itemBuilder: (ctx, i) => Column(
             children: [
+              const SizedBox(height: 10),
               UserProductListTile(
                 productsManager.items[i],
               ),
-              const Divider(),
             ],
           ),
         );

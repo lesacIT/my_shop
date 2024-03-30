@@ -4,7 +4,7 @@ Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: const Text('Are you sure?'),
+      title: const Text('Bạn có chắc?'),
       content: Text(message),
       actions: <Widget>[
         Row(
@@ -12,7 +12,7 @@ Future<bool?> showConfirmDialog(BuildContext context, String message) {
           children: [
             Expanded(
               child: ActionButton(
-                actionText: 'No',
+                actionText: 'Không',
                 onPressed: () {
                   Navigator.of(ctx).pop(false);
                 },
@@ -20,7 +20,7 @@ Future<bool?> showConfirmDialog(BuildContext context, String message) {
             ),
             Expanded(
               child: ActionButton(
-                actionText: 'Yes',
+                actionText: 'Có',
                 onPressed: () {
                   Navigator.of(ctx).pop(true);
                 },
@@ -46,7 +46,7 @@ class ActionButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       child: Text(
-        actionText ?? 'Okay',
+        actionText ?? 'OK',
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: Theme.of(context).colorScheme.primary,
               fontSize: 24,
@@ -61,7 +61,7 @@ Future<void> showErrorDialog(BuildContext context, String message) {
     context: context,
     builder: (ctx) => AlertDialog(
       icon: const Icon(Icons.error),
-      title: const Text('An Error Occurred!'),
+      title: const Text('Xảy ra lỗi!'),
       content: Text(message),
       actions: <Widget>[
         ActionButton(

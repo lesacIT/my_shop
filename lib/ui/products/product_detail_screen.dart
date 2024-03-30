@@ -20,6 +20,7 @@ class ShoppingCartButton1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return TopRightBadge(
       data: context.watch<CartManager>().productCount,
+      textColor: Colors.white,
       child: IconButton(
         icon: const Icon(Icons.shopping_cart),
         onPressed: onPressed,
@@ -57,9 +58,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           elevation: 0,
-          title: Text("Chi Tiết Sản Phẩm"),
+          title: Text(
+            "Chi Tiết Sản Phẩm",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           leading: BackButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -67,12 +71,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           foregroundColor: Color(0xFF820233),
           actions: [
-            IconButton(
-              onPressed: () {
-                // Thực hiện hành động khi nhấn nút yêu thích
-              },
-              icon: const Icon(Icons.favorite, color: Colors.redAccent),
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //     // Thực hiện hành động khi nhấn nút yêu thích
+            //   },
+            //   icon: const Icon(Icons.favorite, color: Colors.redAccent),
+            // ),
             ShoppingCartButton1(
               onPressed: () {
                 Navigator.push(
@@ -95,7 +99,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: FanCarouselImageSlider(
-                      sliderHeight: 380,
+                      sliderHeight: 350,
                       autoPlay: true,
                       imagesLink: images,
                       isAssets: false,
@@ -117,23 +121,32 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          "La Beauté",
+                          NumberFormat.currency(locale: 'vi_VN', symbol: '₫')
+                              .format(widget.product.price),
                           style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color(0xFFC8273E),
                           ),
                         )
                       ],
                     ),
-                    Text(
-                      NumberFormat.currency(locale: 'vi_VN', symbol: '₫')
-                          .format(widget.product.price),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Color(0xFFC8273E),
-                      ),
-                    )
+                    // Text(
+                    //   NumberFormat.currency(locale: 'vi_VN', symbol: '₫')
+                    //       .format(widget.product.price),
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.bold,
+                    //     fontSize: 25,
+                    //     color: Color(0xFFC8273E),
+                    //   ),
+                    // )
+
+                    IconButton(
+                      onPressed: () {
+                        // Thực hiện hành động khi nhấn nút yêu thích
+                      },
+                      icon: const Icon(Icons.favorite, color: Colors.redAccent),
+                    ),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -158,7 +171,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Son BBIA mang đến cho bạn một sắc màu tinh tế, từ những tông màu nude dịu dàng đến những gam màu đậm cá tính, đảm bảo đáp ứng mọi nhu cầu trang điểm của bạn.",
+                    widget.product.description,
                     style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.w500,
@@ -458,11 +471,13 @@ class ProductDetailsPopUp extends StatelessWidget {
                           Row(
                             children: [
                               SizedBox(width: 10),
-                              Text("Nhỏ", style: iStyle),
+                              Text("Nhỏ",
+                                  style: iStyle.copyWith(color: Colors.grey)),
                               SizedBox(width: 30),
                               Text("Vừa", style: iStyle),
                               SizedBox(width: 30),
-                              Text("Lớn", style: iStyle),
+                              Text("Lớn",
+                                  style: iStyle.copyWith(color: Colors.grey)),
                               SizedBox(width: 30),
                             ],
                           ),
@@ -507,7 +522,7 @@ class ProductDetailsPopUp extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Expanded(
-                    child: ElevatedButton(
+                    child: TextButton(
                       onPressed: () {
                         final cart = context.read<CartManager>();
                         final cartItem = CartItem(
@@ -522,10 +537,11 @@ class ProductDetailsPopUp extends StatelessWidget {
                           ..hideCurrentSnackBar()
                           ..showSnackBar(
                             SnackBar(
-                              content: const Text('Item added to cart'),
-                              duration: const Duration(seconds: 2),
+                              content:
+                                  const Text('Sản phẩm đã được thêm vào giỏ'),
+                              duration: const Duration(seconds: 3),
                               action: SnackBarAction(
-                                label: 'UNDO',
+                                label: 'HOÀN TÁC',
                                 onPressed: () {
                                   cart.removeItem(product.id!);
                                 },
@@ -533,15 +549,6 @@ class ProductDetailsPopUp extends StatelessWidget {
                             ),
                           );
                       },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(double.infinity, 65),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: const BorderSide(
-                            color: Color.fromARGB(255, 249, 247, 250),
-                          ),
-                        ),
-                      ),
                       child: ContainerButtonModel(
                         containerWidth: MediaQuery.of(context).size.width,
                         itext: "Thêm Vào Giỏ Hàng",

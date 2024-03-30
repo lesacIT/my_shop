@@ -18,7 +18,10 @@ class OrdersScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text("ĐƠN HÀNG"),
+        title: const Text(
+          "ĐƠN HÀNG",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         automaticallyImplyLeading: true,
         foregroundColor: Color(0xFF820233),
       ),

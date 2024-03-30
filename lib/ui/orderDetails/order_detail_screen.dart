@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/order_item.dart';
 import '/models/cart_item.dart';
@@ -22,7 +23,10 @@ class OrderDetailsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text("CHI TIẾT ĐƠN HÀNG"),
+        title: const Text(
+          "CHI TIẾT ĐƠN HÀNG",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         automaticallyImplyLeading: true,
         foregroundColor: Color(0xFF820233),
       ),
@@ -49,7 +53,7 @@ class OrderDetailsScreen extends StatelessWidget {
   }
 
   Widget buildDetais(OrderDetailsManager order, BuildContext context) {
-    return Card(
+    return Container(
       margin: const EdgeInsets.all(15),
       child: Padding(
         padding: const EdgeInsets.all(15),
@@ -63,7 +67,7 @@ class OrderDetailsScreen extends StatelessWidget {
             const Spacer(),
             Chip(
               label: Text(
-                '${order.totalAmout}',
+                "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(orderItem.totalPrice)}",
                 style: TextStyle(
                   color: Theme.of(context).primaryTextTheme.titleLarge?.color,
                   fontSize: 13,
