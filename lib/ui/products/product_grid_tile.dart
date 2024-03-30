@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
 
@@ -98,7 +99,7 @@ class ProductGridHeader extends StatelessWidget {
                   icon: Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_border,
                   ),
-color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.secondary,
                   iconSize: 24,
                   onPressed: onFavoritePressed,
                 );
@@ -142,7 +143,9 @@ class ProductGridFooter extends StatelessWidget {
             ),
             SizedBox(height: 5), // Khoảng cách giữa title và price
             Text(
-              '\$${product.price.toStringAsFixed(2)}',
+              // '\$${product.price.toStringAsFixed(2)}',
+              NumberFormat.currency(locale: 'vi_VN', symbol: '₫')
+                  .format(product.price),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,

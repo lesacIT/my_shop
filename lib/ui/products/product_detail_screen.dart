@@ -41,8 +41,16 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _quantity = 1;
-  List<String> images = List.generate(5, (index) => "images/image2.jpg");
-  
+  List<String> images = List.generate(5, (index) => "");
+  @override
+  void initState() {
+    super.initState();
+    // Thêm đường dẫn hình ảnh từ widget.product.imageUrl vào danh sách images
+    for (int i = 0; i < images.length; i++) {
+      images[i] = widget.product.imageUrl;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -90,7 +98,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       sliderHeight: 380,
                       autoPlay: true,
                       imagesLink: images,
-                      isAssets: true,
+                      isAssets: false,
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +117,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          "Son Bbia",
+                          "La Beauté",
                           style: TextStyle(
                             color: Colors.black54,
                             fontWeight: FontWeight.w500,
@@ -377,9 +385,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
-  void _updateQuantity(int delta) {
+  Future<void> _updateQuantity(int delta) async {
     setState(() {
-      _quantity = (_quantity + delta).clamp(0, 99);
+      _quantity =
+          (_quantity + delta).clamp(1, 99); // Giới hạn số lượng từ 1 đến 99
     });
   }
 }
