@@ -47,6 +47,8 @@ flutter:
     - images/
     - images/cats/
     - images/products/
+    
+  
   fonts:
   - family: Lato
     fonts:

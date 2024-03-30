@@ -174,14 +174,13 @@ class _TopPortion extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                          'https://wallpapercave.com/wp/wp8265156.jpg'),
-                    ),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('./images/avatarapp.jpg'),
+                    // backgroundColor: Colors.grey,
+                    // child: Icon(
+                    //   Icons.person,
+                    //   color: Colors.white,
+                    // ),
                   ),
                 ),
               ],
