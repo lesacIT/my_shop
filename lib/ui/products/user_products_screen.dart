@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/screens.dart';
 import 'package:provider/provider.dart';
 
-import '../shared/app_drawer.dart';
 import 'user_product_list_tile.dart';
 
 class UserProductsScreen extends StatelessWidget {
@@ -28,9 +27,15 @@ class UserProductsScreen extends StatelessWidget {
             },
           ),
         ],
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(Admin.routeName);
+          },
+        ),
       ),
       // Thêm Drawer
-      drawer: const AppDrawer(),
+      // drawer: const AppDrawer(),
+
       body: FutureBuilder(
         future: context.read<ProductsManager>().fetchProducts(),
         builder: (ctx, snapshot) {

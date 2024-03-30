@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 
 import '../favorite/product_favorite_screen.dart';
 import '../orders/orders_screen.dart';
-import '../products/user_products_screen.dart';
 import '../user/user_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +55,15 @@ class AppDrawer extends StatelessWidget {
                   .pushReplacementNamed(OrdersScreen.routeName);
             },
           ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Quản Lí Sản Phẩm'),
-            onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(UserProductsScreen.routeName);
-            },
-          ),
+          // const Divider(),
+          // ListTile(
+          //   leading: const Icon(Icons.edit),
+          //   title: const Text('Quản Lí Sản Phẩm'),
+          //   onTap: () {
+          //     Navigator.of(context)
+          //         .pushReplacementNamed(UserProductsScreen.routeName);
+          //   },
+          // ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.admin_panel_settings),
@@ -99,9 +99,23 @@ class AppDrawer extends StatelessWidget {
           // const Divider(),
           // ListTile(
           //   leading: const Icon(Icons.help, color: Colors.green),
-          //   title: const Text('About'),
+          //   title: Text(
+          //     'Giới thiệu',
+          //     style: TextStyle(fontWeight: FontWeight.bold),
+          //   ),
           //   onTap: () {
-          //     Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
+          //     // Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
+          //   },
+          // ),
+          // const Divider(),
+          // ListTile(
+          //   leading: const Icon(Icons.settings, color: Colors.red),
+          //   title: Text(
+          //     'Cài Đặt',
+          //     style: TextStyle(fontWeight: FontWeight.bold),
+          //   ),
+          //   onTap: () {
+          //     // Navigator.of(context).pushReplacementNamed(UserScreen.routeName);
           //   },
           // ),
           const Divider(),

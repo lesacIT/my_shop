@@ -56,7 +56,10 @@ class ProductsGrid extends StatelessWidget {
                         child: Text(
                           tabs[index],
                           style: TextStyle(
-                            color: Colors.black38,
+                            color: index == 0
+                                ? Color(0xFF820233)
+                                : Colors
+                                    .black38, // Kiểm tra nếu index là 0 thì màu đỏ, ngược lại màu đen
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),

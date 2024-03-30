@@ -197,10 +197,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ..hideCurrentSnackBar()
                           ..showSnackBar(
                             SnackBar(
-                              content: const Text('Item added to cart'),
+                              content:
+                                  const Text('Thêm sản phẩm vào giỏ hàng'),
                               duration: const Duration(seconds: 2),
                               action: SnackBarAction(
-                                label: 'UNDO',
+                                label: 'HOÀN TÁC',
                                 onPressed: () {
                                   cart.removeItem(widget.product.id!);
                                 },
