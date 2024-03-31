@@ -107,66 +107,71 @@ class ItemInfoCard extends StatelessWidget {
     // );
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Checkbox(
-            splashRadius: 20,
-            activeColor: Color(0xFFC8273E),
-            value: true,
-            onChanged: (val) {},
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              cartItem.imageUrl,
-              fit: BoxFit.cover,
-              width: 80,
-              height: 80,
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Checkbox(
+              splashRadius: 20,
+              activeColor: Color(0xFFC8273E),
+              value: true,
+              onChanged: (val) {},
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                cartItem.title,
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                cartItem.imageUrl,
+                fit: BoxFit.cover,
+                width: 80,
+                height: 80,
               ),
-              SizedBox(height: 10),
-              Text(
-                "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(cartItem.price * cartItem.quantity)}",
-                style: TextStyle(
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    cartItem.title,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(cartItem.price * cartItem.quantity)}",
+                    style: TextStyle(
+                      color: Color(0xFFC8273E),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Icon(
+                  CupertinoIcons.minus,
+                  color: Colors.green,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  '${cartItem.quantity}',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                ),
+                SizedBox(width: 10),
+                Icon(
+                  CupertinoIcons.plus,
                   color: Color(0xFFC8273E),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900,
                 ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                CupertinoIcons.minus,
-                color: Colors.green,
-              ),
-              SizedBox(width: 10),
-              Text(
-                '${cartItem.quantity}',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              ),
-              SizedBox(width: 10),
-              Icon(
-                CupertinoIcons.plus,
-                color: Color(0xFFC8273E),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
