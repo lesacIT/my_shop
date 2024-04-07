@@ -1,121 +1,41 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:myshop/models/auth_token.dart';
+import 'package:myshop/models/cart_item.dart';
+import 'package:myshop/models/product.dart';
+import 'package:myshop/services/cart_service.dart';
 
-import '../../models/auth_token.dart';
-import '../../models/cart_item.dart';
-import '../../models/product.dart';
-import '../../services/cart_service.dart';
+class CartManager with ChangeNotifier {
+  Map<String, CartItem> _items = {
+    // 'p1': CartItem(
+    //   id: 'c1',
+    //   title: 'Red Shirt',
+    //   imageUrl:
+    //       'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+    //   price: 29.99,
+    //   quantity: 2,
+    // ),
+    //  'p2': CartItem(
+    //   id: 'c1',
+    //   title: 'Red Shirt',
+    //   imageUrl:
+    //       'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+    //   price: 29.99,
+    //   quantity: 2,
+    // ),
+  };
 
-class CartManager extends ChangeNotifier {
-  // Map<String, CartItem> _items = {
-  //   'p1': CartItem(
-  //     id: 'c1',
-  //     title: 'Red Shirt',
-  //     imageUrl:
-  //         'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
-  //     price: 29.99,
-  //     quantity: 2,
-  //   ),
-  // };
-  CartManager([AuthToken? authToken]) : _cartService = CartService(authToken);
-  static const String _cartKey = 'cart';
-  Map<String, CartItem> _items = {};
   final CartService _cartService;
+  CartManager([AuthToken? authToken]) : _cartService = CartService(authToken);
 
-  Future<void> getCartFromSharePreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey(_cartKey)) {
-      final stringList = prefs.getStringList(_cartKey);
-      for (var element in stringList!) {
-        final item = CartItem.fromJson(json.decode(element));
-        _items.putIfAbsent(item.id, () => item);
-      }
-    }
-    notifyListeners();
-  }
-
-  Future<void> fetchCartItems(String userId) async {
-    _items = Map.fromIterable(
-      await _cartService.fetchCartItems(userId),
-      key: (item) => item.id,
-      value: (item) => item,
-    );
-    notifyListeners();
-  }
-
-  Future<void> addCartItem(CartItem cartItem) async {
-    try {
-      // Gửi yêu cầu HTTP để thêm sản phẩm vào cơ sở dữ liệu
-      await _cartService.addCartItem(cartItem);
-
-      // Nếu sản phẩm đã tồn tại trong giỏ hàng, cộng dồn số lượng lên 1 đơn vị
-      if (_items.containsKey(cartItem.id)) {
-        _items.update(
-          cartItem.id,
-          (existingCartItem) => existingCartItem.copyWith(
-            quantity: existingCartItem.quantity + cartItem.quantity,
-          ),
-        );
-      } else {
-        // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm vào giỏ hàng
-        _items[cartItem.id] = cartItem;
-      }
-
-      // Thông báo cho người nghe biết rằng giỏ hàng đã được cập nhật
-      notifyListeners();
-    } catch (error) {
-      print(error);
-    }
-  }
-
-  Future<void> updateCartItem(CartItem cartItem) async {
-    await _cartService.updateCartItem(cartItem);
-    _items.update(
-      cartItem.id,
-      (existingCartItem) => cartItem,
-    );
-    notifyListeners();
-  }
-
-  void clearAllItems() {
-    _items = {};
-    notifyListeners();
-  }
-
-  Future<void> deleteCartItem(String id) async {
-    await _cartService.deleteCartItem(id);
-    _items.remove(id);
-    notifyListeners();
-  }
-
-  Future<void> saveCartToSharePreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    if (productCount < 1) {
-      if (prefs.containsKey(_cartKey)) {
-        prefs.remove(_cartKey);
-      }
-    }
-    final List<String> stringList = [];
-    _items.forEach((key, element) {
-      stringList.add(json.encode(element.toJson()));
-    });
-    prefs.setStringList(_cartKey, stringList);
-    notifyListeners();
+  set authToken(AuthToken? authToken) {
+    _cartService.authToken = authToken;
   }
 
   int get productCount {
     return _items.length;
   }
 
-  Map<String, CartItem> get products {
-    return _items;
-  }
-
-  List<CartItem> get productsList {
+  List<CartItem> get products {
     return _items.values.toList();
   }
 
@@ -123,95 +43,71 @@ class CartManager extends ChangeNotifier {
     return {..._items}.entries;
   }
 
-//   double get totalAmount {
-//   double total = 0;
-//   _items.forEach((index, product) {
-//     total += product.price * product.quantity;
-//   });
-//   return total;
-// }
-
-  bool isProductExist() {
-    return false;
+  double get totalAmount {
+    var total = 0.0;
+    _items.forEach((key, cartItem) {
+      total += cartItem.price * cartItem.quantity;
+    });
+    return total;
   }
 
-  void addItem(Product product, int quantity) {
-    if (_items.containsKey(product.id)) {
-      _items.update(
-        product.id!,
-        (existingCartItem) => existingCartItem.copyWith(
-          quantity: existingCartItem.quantity + quantity,
-        ),
-      );
-    } else {
-      _items.putIfAbsent(
-        product.id!,
-        () => CartItem(
-          id: product.id!, // Sử dụng id của sản phẩm khi thêm sản phẩm mới
-          title: product.title,
-          imageUrl: product.imageUrl,
-          price: product.price,
-          quantity: quantity,
-        ),
-      );
-    }
-    saveCartToSharePreferences();
-  }
+  // void addItem(Product product) {
+  //   if (_items.containsKey(product.id)) {
+  //     _items.update(
+  //         product.id!,
+  //         (existingxCart) => existingxCart.copyWith(
+  //               quantity: existingxCart.quantity + 1,
+  //             ));
+  //   } else {
+  //     _items.putIfAbsent(
+  //       product.id!,
+  //       () => CartItem(
+  //         id: 'c${DateTime.now().toIso8601String()}',
+  //         title: product.title,
+  //         imageUrl: product.imageUrl,
+  //         price: product.price,
+  //         quantity: 1,
+  //       ),
+  //     );
+  //   }
+  //   notifyListeners();
+  // }
 
-  void addByProductId(List<String> productIds) async {
-    for (String productId in productIds) {
-      final productData = await getProductById(productId);
-      if (productData != null) {
-        final CartItem cartItem = CartItem(
-          id: productData['id'],
-          title: productData['title'],
-          imageUrl: productData['imageUrl'],
-          price: productData['price'],
-          quantity:
-              1, // Khởi tạo số lượng là 1 khi thêm mới một mặt hàng vào giỏ hàng
-        );
-        if (_items.containsKey(productId)) {
-          _items.update(
-            productId,
-            (existCartItem) =>
-                existCartItem.copyWith(quantity: existCartItem.quantity + 1),
-          );
-        } else {
-          _items[productId] = cartItem;
-        }
-      } else {
-        // Xử lý trường hợp không tìm thấy sản phẩm với ID đã cho (nếu cần)
-      }
-    }
-    saveCartToSharePreferences();
-  }
+  // void clearItem(String productId) {
+  //   _items.remove(productId);
+  //   notifyListeners();
+  // }
 
-  Future<Map<String, dynamic>?> getProductById(String productId) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey(_cartKey)) {
-      final stringList = prefs.getStringList(_cartKey);
-      if (stringList != null) {
-        for (var element in stringList) {
-          final cartItem = CartItem.fromJson(json.decode(element));
-          if (cartItem.id == productId) {
-            return {
-              'id': cartItem.id,
-              'title': cartItem.title,
-              'imageUrl': cartItem.imageUrl,
-              'price': cartItem.price,
-            };
-          }
-        }
-      }
-    }
-    return null;
-  }
+  // void updateQuantityItem(Product product, int quantity) async {
 
-  void removeItem(String productId) {
+  //   if (_items.containsKey(product.id)) {
+  //     _items.update(
+  //         product.id!,
+  //         (existingxCart) => existingxCart.copyWith(
+  //               quantity: existingxCart.quantity + quantity,
+  //             ));
+  //   } else {
+  //     _items.putIfAbsent(
+  //       product.id!,
+  //       () => CartItem(
+  //         id: 'c${DateTime.now().toIso8601String()}',
+  //         title: product.title,
+  //         imageUrl: product.imageUrl,
+  //         price: product.price,
+  //         quantity: quantity,
+  //       ),
+  //     );
+  //   }
+  //   notifyListeners();
+  // }
+
+  Future<void> removeItem(String productId) async {
     if (!_items.containsKey(productId)) {
       return;
     }
     if (_items[productId]?.quantity as num > 1) {
+      await _cartService.updateItemCart(
+          productId, _items[productId]!.quantity - 1);
       _items.update(
         productId,
         (existingCartItem) => existingCartItem.copyWith(
@@ -219,37 +115,75 @@ class CartManager extends ChangeNotifier {
         ),
       );
     } else {
+      await _cartService.deleleItemCart(productId);
       _items.remove(productId);
     }
-    saveCartToSharePreferences();
+    notifyListeners();
   }
 
-  void clearItem(String productId) {
+  void clearAllItems() {
+    _cartService.deleteAllItem();
+    _items = {};
+    notifyListeners();
+  }
+
+  Future<void> clearItem(String productId) async {
+    await _cartService.deleleItemCart(productId);
     _items.remove(productId);
-    saveCartToSharePreferences();
+    notifyListeners();
   }
 
-  void clearCart() {
-    _items.clear();
-    saveCartToSharePreferences();
+  Future<void> fetchCart() async {
+    _items = await _cartService.fetchCart();
+
+    notifyListeners();
   }
-  // int get productCount {
-  //   return _items.length;
-  // }
 
-  // List<CartItem> get products {
-  //   return _items.values.toList();
-  // }
+  Future<void> addItem(CartItem product) async {
+    if (_items.containsKey(product.id)) {
+      _items.update(
+          product.id!,
+          (existingxCart) => existingxCart.copyWith(
+                quantity: existingxCart.quantity + 1,
+              ));
+      await _cartService.addCartItem(_items);
+    } else {
+      _items.putIfAbsent(
+        product.id!,
+        () => CartItem(
+          id: 'c${DateTime.now().toIso8601String()}',
+          title: product.title,
+          imageUrl: product.imageUrl,
+          price: product.price,
+          quantity: 1,
+        ),
+      );
+      await _cartService.addCartItem(_items);
+    }
+    notifyListeners();
+  }
 
-  // Iterable<MapEntry<String, CartItem>> get productEntries {
-  //   return {..._items}.entries;
-  // }
-
-  double get totalAmount {
-    var total = 0.0;
-    _items.forEach((key, CartItem) {
-      total += CartItem.price * CartItem.quantity;
-    });
-    return total;
+  Future<void> updateQuantityItem(Product product, int quantity) async {
+    if (_items.containsKey(product.id)) {
+      _items.update(
+          product.id!,
+          (existingxCart) => existingxCart.copyWith(
+                quantity: existingxCart.quantity + quantity,
+              ));
+      await _cartService.addCartItem(_items);
+    } else {
+      _items.putIfAbsent(
+        product.id!,
+        () => CartItem(
+          id: 'c${DateTime.now().toIso8601String()}',
+          title: product.title,
+          imageUrl: product.imageUrl,
+          price: product.price,
+          quantity: quantity,
+        ),
+      );
+      await _cartService.addCartItem(_items);
+    }
+    notifyListeners();
   }
 }

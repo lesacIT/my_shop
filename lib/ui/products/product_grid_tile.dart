@@ -48,7 +48,7 @@ class ProductGridTile extends StatelessWidget {
               price: product.price,
             );
             final cart = context.read<CartManager>();
-            await cart.addCartItem(cartItem);
+          await cart.addItem(cartItem);
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(

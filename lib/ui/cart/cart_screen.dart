@@ -14,7 +14,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = context.watch<CartManager>();
-    cart.getCartFromSharePreferences();
+    // cart.getCartFromSharePreferences();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -106,10 +106,10 @@ class CartScreen extends StatelessWidget {
             : () async {
                 try {
                   await context.read<OrdersManager>().addOrder(
-                        cart.productsList,
+                        cart.products,
                         cart.totalAmount,
                       );
-                  context.read<CartManager>().clearCart();
+                  context.read<CartManager>().clearAllItems();
                 } catch (err) {
                   print("có lỗi xảy ra");
                 }

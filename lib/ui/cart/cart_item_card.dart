@@ -43,7 +43,8 @@ class CartItemCard extends StatelessWidget {
         );
       },
       onDismissed: (direction) {
-        context.read<CartManager>().deleteCartItem(productId);
+        // context.read<CartManager>().deleteCartItem(productId);
+        context.read<CartManager>().clearItem(productId);
         // CartScreen.removeItem(productId);
       },
       child: ItemInfoCard(cardItem),

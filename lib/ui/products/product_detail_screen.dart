@@ -192,7 +192,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           price: widget.product.price,
                           quantity: _quantity,
                         );
-                        cart.addCartItem(cartItem);
+                        cart.addItem(cartItem);
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(
@@ -235,165 +235,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ],
             ),
           ),
-          //child:
-          // //Column(
-          //   children: <Widget>[
-          //     const SizedBox(height: 40),
-          //     SizedBox(
-          //       height: 300,
-          //       width: double.infinity,
-          //       child: Image.network(
-          //         widget.product.imageUrl,
-          //         fit: BoxFit.cover,
-          //       ),
-          //     ),
-          //     const SizedBox(height: 10),
-          //     Row(
-          //       children: [
-          //         Container(
-          //           padding: const EdgeInsets.only(left: 20),
-          //           child: Text(
-          //             widget.product.title,
-          //             style: const TextStyle(
-          //               color: Colors.black,
-          //               fontSize: 20,
-          //               fontWeight: FontWeight.bold,
-          //             ),
-          //           ),
-          //         ),
-          //         Container(
-          //           padding: const EdgeInsets.only(left: 180),
-          //           child: Text(
-          //             '\$${widget.product.price}',
-          //             style: const TextStyle(
-          //               color: Colors.red,
-          //               fontSize: 22,
-          //               fontWeight: FontWeight.bold,
-          //             ),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //     const SizedBox(height: 10),
-          //     Container(
-          //       padding: const EdgeInsets.symmetric(horizontal: 10),
-          //       width: double.infinity,
-          //       child: const Text(
-          //         "Chi tiết sản phẩm: ",
-          //         textAlign: TextAlign.left,
-          //         softWrap: true,
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Color.fromARGB(255, 15, 15, 14),
-          //         ),
-          //       ),
-          //     ),
-          //     const SizedBox(height: 10),
-          //     Container(
-          //       padding: const EdgeInsets.symmetric(horizontal: 10),
-          //       width: double.infinity,
-          //       child: const Text(
-          //         "Áo thun là một loại trang phục thông dụng được làm từ chất liệu vải nhẹ, thường là cotton hoặc các loại vải co giãn khác. Áo thun có thiết kế đơn giản, thường không có cổ áo và có đôi khi có tay ngắn hoặc dài.",
-          //         textAlign: TextAlign.left,
-          //         softWrap: true,
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Color.fromARGB(221, 54, 54, 53),
-          //         ),
-          //       ),
-          //     ),
-          //     const SizedBox(height: 70),
-          //     Container(
-          //       color: const Color.fromARGB(255, 218, 225, 221),
-          //       padding:
-          //           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          //       height: 100,
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //         children: [
-          //           Container(
-          //             width: 150,
-          //             height: 60,
-          //             padding: const EdgeInsets.symmetric(horizontal: 8),
-          //             decoration: BoxDecoration(
-          //               color: Colors.grey.shade200,
-          //               borderRadius: BorderRadius.circular(999),
-          //             ),
-          //             child: Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 InkWell(
-          //                   onTap: () => _updateQuantity(-1),
-          //                   child: const CircleAvatar(
-          //                     radius: 22,
-          //                     backgroundColor: Colors.grey,
-          //                     child: Icon(Icons.remove),
-          //                   ),
-          //                 ),
-          //                 Text(
-          //                   "$_quantity",
-          //                   style: const TextStyle(fontSize: 20),
-          //                 ),
-          //                 InkWell(
-          //                   onTap: () => _updateQuantity(1),
-          //                   child: const CircleAvatar(
-          //                     radius: 22,
-          //                     backgroundColor: Colors.grey,
-          //                     child: Icon(Icons.add),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           const SizedBox(width: 10),
-          //           Expanded(
-          //             child: ElevatedButton(
-          //               onPressed: () {
-          //                 final cart = context.read<CartManager>();
-          //                 final cartItem = CartItem(
-          //                   id: widget.product.id!,
-          //                   title: widget.product.title,
-          //                   imageUrl: widget.product.imageUrl,
-          //                   price: widget.product.price,
-          //                   quantity: _quantity,
-          //                 );
-          //                 cart.addCartItem(cartItem);
-          //                 ScaffoldMessenger.of(context)
-          //                   ..hideCurrentSnackBar()
-          //                   ..showSnackBar(
-          //                     SnackBar(
-          //                       content: const Text('Item added to cart'),
-          //                       duration: const Duration(seconds: 2),
-          //                       action: SnackBarAction(
-          //                         label: 'UNDO',
-          //                         onPressed: () {
-          //                           cart.removeItem(widget.product.id!);
-          //                         },
-          //                       ),
-          //                     ),
-          //                   );
-          //               },
-          //               style: ElevatedButton.styleFrom(
-          //                 // primary: const Color.fromARGB(255, 51, 173, 204),
-          //                 fixedSize: const Size(double.infinity, 65),
-          //                 shape: RoundedRectangleBorder(
-          //                   borderRadius: BorderRadius.circular(18.0),
-          //                   side: const BorderSide(
-          //                     color: Color.fromARGB(255, 249, 247, 250),
-          //                   ),
-          //                 ),
-          //               ),
-          //               child: const Text(
-          //                 "Thêm Sản Phẩm",
-          //                 style: TextStyle(fontSize: 18, color: Colors.white),
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ),
       ),
     );
@@ -407,23 +248,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 
-class ProductDetailsPopUp extends StatelessWidget {
+class ProductDetailsPopUp extends StatefulWidget {
   final Function(int) updateQuantity;
   final int quantity;
-  final Product product; // Add this line
-
-  final iStyle = TextStyle(
-    color: Colors.black87,
-    fontWeight: FontWeight.w600,
-    fontSize: 18,
-  );
+  final Product product;
 
   ProductDetailsPopUp({
     Key? key,
     required this.updateQuantity,
     required this.quantity,
-    required this.product, // Add this line
+    required this.product,
   }) : super(key: key);
+
+  @override
+  _ProductDetailsPopUpState createState() => _ProductDetailsPopUpState();
+}
+
+class _ProductDetailsPopUpState extends State<ProductDetailsPopUp> {
+  final iStyle = TextStyle(
+    color: Colors.black87,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -432,132 +278,140 @@ class ProductDetailsPopUp extends StatelessWidget {
         showModalBottomSheet(
           backgroundColor: Colors.transparent,
           context: context,
-          builder: (context) => Container(
-            height: MediaQuery.of(context).size.height / 2.5,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
+          builder: (context) => StatefulBuilder(
+            builder: (context, setState) => Container(
+              height: MediaQuery.of(context).size.height / 2.5,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
               ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Khối lượng: ",
-                            style: iStyle,
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "Số lượng: ",
-                            style: iStyle,
-                          ),
-                          SizedBox(height: 20),
-                        ],
-                      ),
-                      SizedBox(width: 30),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(width: 10),
-                              Text("Nhỏ",
-                                  style: iStyle.copyWith(color: Colors.grey)),
-                              SizedBox(width: 30),
-                              Text("Vừa", style: iStyle),
-                              SizedBox(width: 30),
-                              Text("Lớn",
-                                  style: iStyle.copyWith(color: Colors.grey)),
-                              SizedBox(width: 30),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            children: [
-                              SizedBox(width: 10),
-                              GestureDetector(
-                                onTap: () => updateQuantity(-1),
-                                child: Text("-", style: iStyle),
-                              ),
-                              SizedBox(width: 30),
-                              Text("$quantity", style: iStyle),
-                              SizedBox(width: 30),
-                              GestureDetector(
-                                onTap: () => updateQuantity(1),
-                                child: Text("+", style: iStyle),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Tổng Tiền",
-                        style: iStyle,
-                      ),
-                      Text(
-                        "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(product.price * quantity)}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFC8273E),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        final cart = context.read<CartManager>();
-                        final cartItem = CartItem(
-                          id: product.id!,
-                          title: product.title,
-                          imageUrl: product.imageUrl,
-                          price: product.price,
-                          quantity: quantity, // Use quantity from parameters
-                        );
-                        cart.addCartItem(cartItem);
-                        ScaffoldMessenger.of(context)
-                          ..hideCurrentSnackBar()
-                          ..showSnackBar(
-                            SnackBar(
-                              content:
-                                  const Text('Sản phẩm đã được thêm vào giỏ'),
-                              duration: const Duration(seconds: 3),
-                              action: SnackBarAction(
-                                label: 'HOÀN TÁC',
-                                onPressed: () {
-                                  cart.removeItem(product.id!);
-                                },
-                              ),
+              child: Padding(
+                padding: EdgeInsets.all(30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Khối lượng: ",
+                              style: iStyle,
                             ),
+                            SizedBox(height: 20),
+                            Text(
+                              "Số lượng: ",
+                              style: iStyle,
+                            ),
+                            SizedBox(height: 20),
+                          ],
+                        ),
+                        SizedBox(width: 30),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(width: 10),
+                                Text("Nhỏ",
+                                    style: iStyle.copyWith(color: Colors.grey)),
+                                SizedBox(width: 30),
+                                Text("Vừa", style: iStyle),
+                                SizedBox(width: 30),
+                                Text("Lớn",
+                                    style: iStyle.copyWith(color: Colors.grey)),
+                                SizedBox(width: 30),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              children: [
+                                SizedBox(width: 10),
+                                GestureDetector(
+                                  onTap: () {
+                                    widget.updateQuantity(-1);
+                                    setState(() {}); // Rebuild widget
+                                  },
+                                  child: Text("-", style: iStyle),
+                                ),
+                                SizedBox(width: 30),
+                                Text("${widget.quantity}", style: iStyle),
+                                SizedBox(width: 30),
+                                GestureDetector(
+                                  onTap: () {
+                                    widget.updateQuantity(1);
+                                    setState(() {}); // Rebuild widget
+                                  },
+                                  child: Text("+", style: iStyle),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Tổng Tiền",
+                          style: iStyle,
+                        ),
+                        Text(
+                          "${NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(widget.product.price * widget.quantity)}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFC8273E),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          final cart = context.read<CartManager>();
+                          final cartItem = CartItem(
+                            id: widget.product.id!,
+                            title: widget.product.title,
+                            imageUrl: widget.product.imageUrl,
+                            price: widget.product.price,
+                            quantity: widget.quantity,
                           );
-                      },
-                      child: ContainerButtonModel(
-                        containerWidth: MediaQuery.of(context).size.width,
-                        itext: "Thêm Vào Giỏ Hàng",
-                        bgColor: Color(0xFFC8273E),
+                          cart.addItem(cartItem);
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              SnackBar(
+                                content:
+                                    const Text('Sản phẩm đã được thêm vào giỏ'),
+                                duration: const Duration(seconds: 3),
+                                action: SnackBarAction(
+                                  label: 'HOÀN TÁC',
+                                  onPressed: () {
+                                    cart.removeItem(widget.product.id!);
+                                  },
+                                ),
+                              ),
+                            );
+                        },
+                        child: ContainerButtonModel(
+                          containerWidth: MediaQuery.of(context).size.width,
+                          itext: "Thêm Vào Giỏ Hàng",
+                          bgColor: Color(0xFFC8273E),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

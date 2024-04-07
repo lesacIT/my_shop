@@ -11,7 +11,7 @@ Future<void> main() async {
   // await Firebase.initializeApp();
   final cartManager = CartManager();
   // Tải giỏ hàng từ SharedPreferences
-  await cartManager.getCartFromSharePreferences();
+  // await cartManager.getCartFromSharePreferences();
   runApp(const MyApp());
 }
 
