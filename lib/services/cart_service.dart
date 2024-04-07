@@ -15,9 +15,12 @@ class CartService extends FirebaseService {
         '$databaseUrl/userCart/$userId.json?auth=$token',
       ) as Map<String, dynamic>?;
 
-      cartMap?.forEach((productId, product) {
-        cart[productId] = CartItem.fromJson(product);
-      });
+      if (cartMap != null) {
+        cartMap?.forEach((productId, product) {
+          cart[productId] = CartItem.fromJson(product);
+        });
+      }
+
       return cart;
     } catch (error) {
       print(error);

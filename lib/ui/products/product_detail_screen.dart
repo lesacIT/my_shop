@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -185,25 +186,61 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     GestureDetector(
                       onTap: () {
                         final cart = context.read<CartManager>();
-                        final cartItem = CartItem(
-                          id: widget.product.id!,
-                          title: widget.product.title,
-                          imageUrl: widget.product.imageUrl,
-                          price: widget.product.price,
-                          quantity: _quantity,
+                        final existingItem = cart.items.values.firstWhereOrNull(
+                          (item) => item.id == widget.product.id,
                         );
-                        cart.addItem(cartItem);
+
+                        if (existingItem != null) {
+                          // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                          final updatedQuantity =
+                              existingItem.quantity + _quantity;
+                          final updatedItem = CartItem(
+                            id: existingItem.id,
+                            title: existingItem.title,
+                            imageUrl: existingItem.imageUrl,
+                            price: existingItem.price,
+                            quantity: updatedQuantity,
+                          );
+                          cart.removeItem(existingItem.id);
+                          cart.addItem(updatedItem);
+                        } else {
+                          // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm mới
+                          final cartItem = CartItem(
+                            id: widget.product.id!,
+                            title: widget.product.title,
+                            imageUrl: widget.product.imageUrl,
+                            price: widget.product.price,
+                            quantity: _quantity,
+                          );
+                          cart.addItem(cartItem);
+                        }
+
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(
                             SnackBar(
-                              content:
-                                  const Text('Thêm sản phẩm vào giỏ hàng'),
+                              content: const Text('Thêm sản phẩm vào giỏ hàng'),
                               duration: const Duration(seconds: 2),
                               action: SnackBarAction(
-                                label: 'HOÀN TÁC',
+                                label: 'HOÀN TÁC',
                                 onPressed: () {
-                                  cart.removeItem(widget.product.id!);
+                                  if (existingItem != null) {
+                                    // Hoàn tác cập nhật số lượng
+                                    final updatedQuantity =
+                                        existingItem.quantity - _quantity;
+                                    final updatedItem = CartItem(
+                                      id: existingItem.id,
+                                      title: existingItem.title,
+                                      imageUrl: existingItem.imageUrl,
+                                      price: existingItem.price,
+                                      quantity: updatedQuantity,
+                                    );
+                                    cart.removeItem(existingItem.id);
+                                    cart.addItem(updatedItem);
+                                  } else {
+                                    // Hoàn tác thêm mới
+                                    cart.removeItem(widget.product.id!);
+                                  }
                                 },
                               ),
                             ),

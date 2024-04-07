@@ -23,6 +23,7 @@ class CartManager with ChangeNotifier {
     //   quantity: 2,
     // ),
   };
+  Map<String, CartItem> get items => _items;
 
   final CartService _cartService;
   CartManager([AuthToken? authToken]) : _cartService = CartService(authToken);
@@ -140,27 +141,31 @@ class CartManager with ChangeNotifier {
   }
 
   Future<void> addItem(CartItem product) async {
-    if (_items.containsKey(product.id)) {
-      _items.update(
+    try {
+      if (_items.containsKey(product.id)) {
+        _items.update(
+            product.id!,
+            (existingxCart) => existingxCart.copyWith(
+                  quantity: existingxCart.quantity + product.quantity,
+                ));
+        await _cartService.addCartItem(_items);
+      } else {
+        _items.putIfAbsent(
           product.id!,
-          (existingxCart) => existingxCart.copyWith(
-                quantity: existingxCart.quantity + 1,
-              ));
-      await _cartService.addCartItem(_items);
-    } else {
-      _items.putIfAbsent(
-        product.id!,
-        () => CartItem(
-          id: 'c${DateTime.now().toIso8601String()}',
-          title: product.title,
-          imageUrl: product.imageUrl,
-          price: product.price,
-          quantity: 1,
-        ),
-      );
-      await _cartService.addCartItem(_items);
+          () => CartItem(
+            id: 'c${DateTime.now().toIso8601String()}',
+            title: product.title,
+            imageUrl: product.imageUrl,
+            price: product.price,
+            quantity: product.quantity,
+          ),
+        );
+        await _cartService.addCartItem(_items);
+      }
+      notifyListeners();
+    } catch (error) {
+      print(error);
     }
-    notifyListeners();
   }
 
   Future<void> updateQuantityItem(Product product, int quantity) async {
